@@ -1,3 +1,4 @@
+/************ Main Css ************/
 * {
   margin: 0;
   padding: 0;
@@ -10,10 +11,11 @@ html {
 }
 
 body {
+  width: 100%;
   font-weight: 400;
   overflow-x: hidden;
   position: relative;
-  background-color: #121212 !important;
+  background-color: #0c111b !important;
   color: #fff !important;
   font-family: 'Centra', sans-serif !important;
 }
@@ -65,6 +67,12 @@ p.danger {
 }
 /************ Navbar Css ************/
 nav.navbar {
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
+  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.7) 70%);
   padding: 18px 0;
   position: fixed;
   width: 100%;
@@ -74,12 +82,11 @@ nav.navbar {
 }
 nav.navbar.scrolled {
   padding: 0px 0;
-  background-color: #121212;
+  background-color: #0c111b
 }
-nav.navbar a.navbar-brand {
-    width: 9%;
-}
+
 nav.navbar .navbar-nav .nav-link.navbar-link {
+
   font-weight: 400;
   color: #fff !important;
   letter-spacing: 0.8px;
@@ -93,6 +100,7 @@ nav.navbar .navbar-nav a.nav-link.navbar-link.active {
 }
 span.navbar-text {
     display: flex;
+    margin-left: 500px;
     align-items: center;
 }
 .social-icon {
@@ -104,7 +112,7 @@ span.navbar-text {
     height: 42px;
     background: rgba(217, 217, 217, 0.1);
     display: inline-flex;
-    border-radius: 50%;
+    border-radius: 10px;
     margin-right: 6px;
     align-items: center;
     justify-content: center;
@@ -117,12 +125,13 @@ span.navbar-text {
     height: 42px;
     position: absolute;
     background-color: #ffffff;
-    border-radius: 50%;
+    border-radius: 10px;
     transform: scale(0);
 	transition: 0.3s ease-in-out;
 }
 .social-icon a:hover::before {
     transform: scale(1);
+    background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.5) -5.91%, rgba(0, 58, 250, 0.5) 111.58%);
 }
 .social-icon a img {
 	width: 40%;
@@ -130,19 +139,21 @@ span.navbar-text {
 	transition: 0.3s ease-in-out;
 }
 .social-icon a:hover img {
-	filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
+	filter: brightness(0) saturate(100%) invert(100%) sepia(7%) saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
 }
 .navbar-text button {
   font-weight: 700;
   color: #fff;
-  border: 1px solid #fff;
+  border: 2px solid grey;
   border-radius: 10px;
   padding: 18px 34px;
   font-size: 18px;
   margin-left: 18px;
 	position: relative;
 	background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 14px 28px, rgba(0, 0, 0, 0.32) 0px 10px 10px;
 	transition: 0.3s ease-in-out;
+
 }
 .navbar-text button span {
   z-index: 1;
@@ -151,8 +162,6 @@ span.navbar-text {
   content: "";
   width: 0%;
   height: 100%;
-  border: none;
-  border-radius: 10px;
   position: absolute;
   background-color: #fff;
   left: 0;
@@ -161,14 +170,22 @@ span.navbar-text {
   transition: 0.3s ease-in-out;
 }
 .navbar-text button:hover {
-  color: #121212;
+  color: #fff;
+  border-color: white;
+  transform: scale(1.1);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.42) 0px 15px 12px;
+  
 }
+
 .navbar-text button:hover::before {
 	content: "";
 	width: 100%;
 	height: 100%;
+  border-radius: 10px;
 	position: absolute;
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.5) -5.91%, rgba(0, 58, 250, 0.5) 111.58%);
 }
+
 nav.navbar .navbar-toggler:active,
 nav.navbar .navbar-toggler:focus {
 	outline: none;
@@ -217,19 +234,21 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /************ Banner Css ************/
 .banner {
-  margin-top: 0;
-  padding: 260px 0 100px 0;
-  background-image: url('./assets/img/banner-bg.png');
+  padding: 260px 0 260px 0px;
+  background: linear-gradient(to right, #030b17 80%, #0c111b00);
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
 }
+
 .banner .tagline {
   font-weight: 700;
   letter-spacing: 0.8px;
   padding: 8px 10px;
-  background: linear-gradient(90.21deg, rgba(170, 54, 124, 0.5) -5.91%, rgba(74, 47, 189, 0.5) 111.58%);
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.5) -5.91%, rgba(0, 58, 250, 0.5) 111.58%);
   border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
   font-size: 20px;
   margin-bottom: 16px;
   display: inline-block;
@@ -249,6 +268,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   line-height: 1.5em;
   width: 96%;
 }
+
+
 .banner button {
   color: #fff;
   font-weight: 700;
@@ -257,18 +278,28 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   letter-spacing: 0.8px;
   display: flex;
   align-items: center;
+
 }
 .banner button svg {
   font-size: 25px;
   margin-left: 10px;
   transition: 0.3s ease-in-out;
   line-height: 1;
+  
+  
 }
 .banner button:hover svg {
   margin-left: 25px;
+  text-decoration: inherit;
+    color: inherit;
 }
+
+
 .banner img {
   animation: updown 3s linear infinite;
+  border-radius: 50%;
+  width: 250px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.42) 0px 15px 12px;
 }
 @keyframes updown {
     0% {
@@ -291,7 +322,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   position: relative;
 }
 .skill-bx {
-  background: #151515;
+  background: #0c111b;
   border-radius: 64px;
   text-align: center;
   padding: 60px 50px;
@@ -313,10 +344,29 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   margin: 0 auto;
   position: relative;
 }
+
 .skill-slider .item img {
-  width: 50%;
-  margin: 0 auto 15px auto;
+  border: 2px solid rgba(128, 128, 128, 0.144);
+  border-radius: 10px;
+  width: 150px;
+  margin: 50px auto 15px auto;
+  box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 38px, rgba(0, 0, 0, 0.32) 0px 15px 12px;
+  padding: 0px 20px 0px 20px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
+
+
+.skill-slider .item img:hover {
+  scale: 1.1;
+  border: 2px solid white;
+  border-radius: 10px;
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.5) -5.91%, rgba(0, 58, 250, 0.5) 111.58%);
+  transition: 0.3s ease-in-out;
+  
+  
+}
+
 .background-image-left {
   top: 28%;
   position: absolute;
@@ -329,7 +379,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .project {
   padding: 80px 0;
   position: relative;
-  background-color: black;
+  background-color: #0c111b;;
 }
 .project h2 {
 	font-size: 45px;
@@ -374,7 +424,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     position: absolute;
     width: 0;
     height: 100%;
-    background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+    background: linear-gradient(90.21deg, #0d30f5 -5.91%, #09206b 111.58%);
     top: 0;
     left: 0;
     z-index: -1;
@@ -403,11 +453,13 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   border-radius: 30px;
   overflow: hidden;
   margin-bottom: 24px;
+  box-shadow: rgba(0, 0, 0, 0.32) 0px 19px 38px, rgba(0, 0, 0, 0.40) 0px 15px 12px;
+  cursor: pointer;
 }
 .proj-imgbx::before {
   content: "";
-  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
-  opacity: 0.85;
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.5) -5.91%, rgba(0, 58, 250, 0.5) 111.58%);
+  opacity: 0.90;
   position: absolute;
   width: 100%;
   height: 0;
@@ -415,6 +467,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 .proj-imgbx:hover::before {
   height: 100%;
+  border-radius: 30px;
+  border: 3px solid white;
+  
 }
 .proj-txtx {
   position: absolute;
@@ -451,9 +506,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   z-index: -4;
 }
 
-/************ Projects Css ************/
+/************ Contacts Css ************/
 .contact {
-  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.5) -5.91%, rgba(0, 58, 250, 0.5) 111.58%);
   padding: 60px 0 200px 0;
 }
 .contact img {
@@ -500,6 +555,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   border-radius: 0;
   position: relative;
   transition: 0.3s ease-in-out;
+  border-radius: 10px;
 }
 .contact form button span {
   z-index: 1;
@@ -507,10 +563,11 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 .contact form button:hover {
   color: #fff;
+  border: #0c111b;
 }
 .contact form button::before {
   content: "";
-  background: #121212;
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.5) -5.91%, rgba(0, 58, 250, 0.5) 111.58%);
   width: 0;
   height: 100%;
   position: absolute;
@@ -518,15 +575,17 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   left: 0;
   z-index: 0;
   transition: 0.3s ease-in-out;
+  border: #0c111b;
+  border-radius: 10px;
 }
 .contact form button:hover::before {
   width: 100%;
+  
 }
 
 /************ Footer Css ************/
 .footer {
   padding: 0 0 50px 0;
-  background-image: url('./assets/img/footer-bg.png');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -555,7 +614,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 .new-email-bx::before {
   content: "";
-  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.5) -5.91%, rgba(0, 58, 250, 0.5) 111.58%);
   border-radius: 20px;
   position: absolute;
   z-index: -1;
@@ -584,12 +643,17 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   padding: 0 15px;
 }
 .new-email-bx button {
-  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.856) -5.91%, rgba(0, 58, 250, 0.733) 111.58%);
   padding: 20px 65px;
   color: #fff;
   font-weight: 500;
   letter-spacing: 0.5px;
   border-radius: 18px;
+}
+
+.new-email-bx button:hover {
+  background: linear-gradient(90.21deg, rgba(25, 23, 61, 0.288) -5.91%, rgba(0, 58, 250, 0.295) 111.58%);
+  color: grey;
 }
 .footer img {
   width: 26%;

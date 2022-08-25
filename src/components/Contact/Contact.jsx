@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './contact.css'
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../../assets/img/contact-img.png";
 import TrackVisibility from 'react-on-screen';

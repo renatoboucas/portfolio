@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import TrackVisibility from "react-on-screen";
 import avatar from '../../assets/img/avatar.jfif'
+import './banner.css'
 
 const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -50,6 +51,10 @@ const Banner = () => {
     }
   };
 
+const grabResume = () => {
+    return window.open('https://github.com/renatoboucas/Resume/raw/master/Full%20Resume%20EAD_8.11.2022.pdf')
+}
+   
   return (
     <section className="banner" id="home">
       <Container>
@@ -67,7 +72,7 @@ const Banner = () => {
                     {`Hi! I'm Renato`}{" "}
                     <span
                       className="txt-rotate"
-                      dataperiod="500"
+                      dataperiod="1000"
                       data-rotate='[ "Web Developer", "IT Manager", "Software Engineer" ]'
                     >
                       <span className="wrap">{text}</span>
@@ -93,7 +98,7 @@ const Banner = () => {
                     changing requirements and specifications.
                   </p>
                   
-                    <button>
+                    <button onClick={grabResume}>
                     Grab my resume <ArrowRightCircle size={25} />
                     </button>
                 </div>

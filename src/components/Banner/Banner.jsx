@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import TrackVisibility from "react-on-screen";
-import avatar from '../../assets/img/avatar.jfif'
-import './banner.css'
+import avatar from "../../assets/img/avatar.jfif";
+import "./banner.css";
 
 const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -51,10 +51,12 @@ const Banner = () => {
     }
   };
 
-const grabResume = () => {
-    return window.open('https://github.com/renatoboucas/Resume/raw/master/Full%20Resume%20EAD_8.11.2022.pdf')
-}
-   
+  const grabResume = () => {
+    return window.open(
+      "https://github.com/renatoboucas/Resume/blob/master/Resume_1.04.2023_red2.pdf"
+    );
+  };
+
   return (
     <section className="banner" id="home">
       <Container>
@@ -73,34 +75,31 @@ const grabResume = () => {
                     <span
                       className="txt-rotate"
                       dataperiod="1000"
-                      data-rotate='[ "Web Developer", "IT Manager", "Software Engineer" ]'
+                      data-rotate='[ "Web Developer", "IT Infrastructure Manager", "Software Engineer" ]'
                     >
                       <span className="wrap">{text}</span>
                     </span>
                   </h1>
                   <p>
-                    I’ve managed business world-wide with the aim of transforming
-                    and empowering companies around the world, applying
-                    innovation and cutting-edge technology to achieve customer
-                    goals, productivity, marketing, profits and more.
-                    Professional experience of more than 14 years in IT, in
-                    which 13 years working as an IT Manager responsible for
-                    managing projects mainly in the educational and
-                    telecommunication sector related to educational games
-                    development, IT infrastructure and licensing for the
-                    operation of telecommunication towers. With the experience gained
-                    in all these years, I believe that bringing this knowledge
-                    to software development and web development it's adding great
-                    value to the projects I'm working on. I am an ambitious
-                    person who gets the most job satisfaction from projects that
-                    require in-depth technical analysis, problem solving
-                    capabilities and also the ability to respond quickly to
-                    changing requirements and specifications.
+                    I am an IT Manager with 14 years of experience leading teams
+                    in IT infrastructure and 3 years of experience designing and
+                    deploying scalable cloud architecture. I have a strong track
+                    record of success, including key achievements such as
+                    executing an onpremise data migration that reduced company
+                    expenses by 70% and implementing cybersecurity protocols
+                    that improved the company's information security in
+                    compliance with GDPR. However, I am now looking to change my
+                    career path and transition into a role as a software/web
+                    developer or solutions architect. My experience in IT
+                    infrastructure and cloud architecture has given me a solid
+                    foundation in understanding technology, and I am confident
+                    that my skills and experience will make me a valuable asset
+                    in a software development or solutions architecture role.
                   </p>
-                  
-                    <button onClick={grabResume}>
+
+                  <button onClick={grabResume}>
                     Grab my resume <ArrowRightCircle size={25} />
-                    </button>
+                  </button>
                 </div>
               )}
             </TrackVisibility>

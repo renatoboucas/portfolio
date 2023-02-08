@@ -53,7 +53,7 @@ const Banner = () => {
 
   const grabResume = () => {
     return window.open(
-      "https://github.com/renatoboucas/Resume/blob/master/Renato_Boucas.Resume.Red.docx"
+      "https://github.com/renatoboucas/Resume/raw/master/Renato_Boucas.Resume.Red.docx"
     );
   };
 

@@ -7,11 +7,12 @@ import { ExperienceHighlights } from "@/components/sections/ExperienceHighlights
 import { PersonalNote } from "@/components/sections/PersonalNote";
 import { ProfessionalStory } from "@/components/sections/ProfessionalStory";
 import { TechStack } from "@/components/sections/TechStack";
+import { WhatIBring } from "@/components/sections/WhatIBring";
 
 export const metadata: Metadata = {
   title: "About | Renato Boucas",
   description:
-    "Learn about Renato Boucas, an AI implementation, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and marketing automation architecture professional.",
+    "Learn about Renato Boucas, an AI Architect and data/Salesforce architecture professional focused on LLM/RAG, CRM/CDP activation, and marketing technology systems.",
   keywords: [
     "Renato Boucas",
     "AI implementation architect",
@@ -32,9 +33,10 @@ export default function AboutPage() {
     <>
       <AboutHero />
       <ProfessionalStory />
+      <WhatIBring />
       <ExperienceHighlights />
-      <TechStack />
       <CertificationsSection />
+      <TechStack />
       <PersonalNote />
       <CTASection />
     </>

@@ -17,9 +17,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <h3 className="text-xl font-semibold leading-tight text-slate-950">{project.title}</h3>
       <p className="mt-4 text-sm leading-6 text-slate-600">{project.summary}</p>
       <div className="mt-5 flex flex-wrap gap-2">
-        {project.focusAreas.slice(0, 4).map((area) => (
+        {project.focusAreas.slice(0, 3).map((area) => (
           <Badge key={area} variant="outline">
             {area}
+          </Badge>
+        ))}
+        {project.tools.slice(0, 3).map((tool) => (
+          <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-100" key={tool} variant="secondary">
+            {tool}
           </Badge>
         ))}
       </div>

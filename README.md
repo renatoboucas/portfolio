@@ -168,7 +168,7 @@ Only verified credentials should be added. Each certification can include an opt
   category: "Salesforce",
   status: "Active",
   url: "https://credential-url.example",
-  logoSrc: "/images/certifications/issuer-logo.png",
+  logo: "/images/certifications/issuer-logo.png",
   logoAlt: "Issuer logo"
 }
 ```

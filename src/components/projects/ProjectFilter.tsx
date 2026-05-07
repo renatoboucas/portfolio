@@ -63,7 +63,7 @@ export function ProjectFilter({ projects }: ProjectFilterProps) {
       </div>
 
       {visibleProjects.length > 0 ? (
-        <div className="mt-10 grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-x-8 gap-y-10 md:grid-cols-2">
           {visibleProjects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}

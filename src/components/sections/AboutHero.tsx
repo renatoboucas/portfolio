@@ -2,14 +2,12 @@ import { Badge } from "@/components/ui/badge";
 import { ProfileVisual } from "@/components/visuals/ProfileVisual";
 
 const badges = [
-  "AI Implementation",
-  "LLM / RAG",
+  "AI Architect",
+  "LLM/RAG",
   "Data Engineering",
   "Salesforce Marketing Cloud",
   "Data Cloud",
   "CRM/CDP Activation",
-  "Marketing Automation",
-  "Technical Leadership",
 ];
 
 export function AboutHero() {
@@ -19,17 +17,11 @@ export function AboutHero() {
         <div>
           <p className="text-sm font-semibold uppercase text-cyan-700">About Renato Boucas</p>
           <h1 className="mt-3 max-w-5xl text-4xl font-bold tracking-normal text-slate-950 sm:text-5xl">
-            I help teams make AI, data, and Salesforce work together in the real world.
+            AI Architect focused on practical customer systems.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-            My background combines IT leadership, data engineering, Salesforce Marketing Cloud architecture,
-            CRM/CDP activation, marketing automation, and emerging AI implementation using LLMs, RAG,
-            and workflow automation.
-          </p>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            I’m especially interested in the space where business teams need practical systems: not just
-            dashboards, not just campaigns, and not just AI experiments, but connected workflows that help
-            people make better decisions and execute with confidence.
+            I help teams connect systems, structure customer data, and turn AI ideas into workflows
+            that are useful, maintainable, and grounded in real operations.
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
             {badges.map((badge) => (

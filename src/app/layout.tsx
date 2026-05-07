@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: absoluteUrl(siteConfig.ogImage),
         width: 1200,
         height: 630,
-        alt: "Renato Boucas - AI, Data Engineering, and Salesforce Architecture",
+          alt: "Renato Boucas - AI Architect, Data Engineering, and Salesforce Architecture",
       },
     ],
     locale: "en_US",

@@ -1,12 +1,11 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { RelatedProjects } from "@/components/projects/RelatedProjects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AIWorkflowVisual } from "@/components/visuals/AIWorkflowVisual";
 import { ArchitectureVisual } from "@/components/visuals/ArchitectureVisual";
 import { DataPipelineVisual } from "@/components/visuals/DataPipelineVisual";
@@ -29,34 +28,25 @@ function ListCard({
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-xl">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ul className="grid gap-3">
-          {items.map((item) => (
-            <li className="flex gap-3 text-sm leading-6 text-slate-600" key={item}>
-              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-700" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+    <section className="border-t pt-5">
+      <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
+      <ul className="mt-4 grid gap-3">
+        {items.map((item) => (
+          <li className="text-sm leading-6 text-slate-600" key={item}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
 function NarrativeCard({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-xl">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm leading-7 text-slate-600">{children}</p>
-      </CardContent>
-    </Card>
+    <section className="border-t pt-5">
+      <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
+      <p className="mt-4 text-sm leading-7 text-slate-600">{children}</p>
+    </section>
   );
 }
 
@@ -96,6 +86,10 @@ function ProjectVisual({ project }: { project: Project }) {
 
 export function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
   const visual = <ProjectVisual project={project} />;
+  const demonstrations = Array.from(new Set([
+    ...project.focusAreas.slice(0, 4),
+    ...project.tools.slice(0, 2),
+  ]));
 
   return (
     <>
@@ -105,10 +99,10 @@ export function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
             <Button asChild className="mb-8" variant="ghost">
               <Link href="/projects">
                 <ArrowLeft className="h-4 w-4" />
-                Back to projects
+                Back to work
               </Link>
             </Button>
-            <div className="grid gap-10 lg:grid-cols-[1fr_0.42fr]">
+            <div className="grid gap-10 lg:grid-cols-[1fr_0.36fr]">
               <div>
                 <div className="flex flex-wrap gap-2">
                   <Badge>{project.category}</Badge>
@@ -121,18 +115,44 @@ export function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                   {project.longSummary ?? project.summary}
                 </p>
               </div>
-              <Card className="h-fit bg-white/90">
-                <CardHeader>
-                  <CardTitle className="text-lg">Focus areas</CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-wrap gap-2">
-                  {project.focusAreas.map((area) => (
-                    <Badge key={area} variant="outline">
-                      {area}
-                    </Badge>
-                  ))}
-                </CardContent>
-              </Card>
+              <aside className="h-fit border-y bg-white/70 py-5">
+                <h2 className="text-sm font-semibold uppercase text-cyan-700">Quick facts</h2>
+                <dl className="mt-4 grid gap-4 text-sm">
+                  <div>
+                    <dt className="font-semibold text-slate-950">Role</dt>
+                    <dd className="mt-1 leading-6 text-slate-600">{project.role}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-slate-950">Category</dt>
+                    <dd className="mt-1 leading-6 text-slate-600">{project.category}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-slate-950">Stack</dt>
+                    <dd className="mt-2 flex flex-wrap gap-2">
+                      {project.tools.slice(0, 4).map((tool) => (
+                        <Badge key={tool} variant="outline">
+                          {tool}
+                        </Badge>
+                      ))}
+                    </dd>
+                  </div>
+                </dl>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-12">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.35fr_1fr] lg:px-8">
+            <div>
+              <p className="text-sm font-semibold uppercase text-cyan-700">What this demonstrates</p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {demonstrations.map((item) => (
+                <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-100" key={item} variant="secondary">
+                  {item}
+                </Badge>
+              ))}
             </div>
           </div>
         </section>
@@ -158,64 +178,34 @@ export function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
         )}
 
         <section className="bg-white py-16">
-          <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-            <NarrativeCard title="Business context">{project.context}</NarrativeCard>
-            <NarrativeCard title="Problem to solve">{project.problem}</NarrativeCard>
-            <NarrativeCard title="Renato's role">{project.role}</NarrativeCard>
-            <NarrativeCard title="Solution">{project.solution}</NarrativeCard>
+          <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+            <NarrativeCard title="Problem">{project.problem}</NarrativeCard>
+            <NarrativeCard title="Approach">{project.solution}</NarrativeCard>
             {project.architecture && (
-              <Card className="lg:col-span-2">
-                <CardHeader>
-                  <CardTitle className="text-xl">Architecture and approach</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="max-w-5xl text-sm leading-7 text-slate-600">
-                    {project.architecture}
-                  </p>
-                </CardContent>
-              </Card>
+              <section className="border-t pt-5 lg:col-span-2">
+                <h2 className="text-xl font-semibold text-slate-950">Architecture</h2>
+                <p className="mt-4 max-w-5xl text-sm leading-7 text-slate-600">
+                  {project.architecture}
+                </p>
+              </section>
             )}
           </div>
         </section>
 
         <section className="bg-slate-50 py-16">
-          <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Tools and platforms</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
+          <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+            <section className="border-t pt-5">
+              <h2 className="text-xl font-semibold text-slate-950">Tools</h2>
+              <div className="mt-4 flex flex-wrap gap-2">
                 {project.tools.map((tool) => (
                   <Badge className="bg-white" key={tool} variant="outline">
                     {tool}
                   </Badge>
                 ))}
-              </CardContent>
-            </Card>
-            <ListCard title="Deliverables" items={project.deliverables} />
-            <ListCard title="Business impact" items={project.impact} />
-            <ListCard title="Challenges" items={project.challenges} />
+              </div>
+            </section>
+            <ListCard title="Outcome" items={project.impact} />
             <ListCard title="Lessons learned" items={project.lessonsLearned} />
-          </div>
-        </section>
-
-        <section className="bg-slate-950 py-16 text-white">
-          <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-            <div className="max-w-3xl">
-              <p className="text-sm font-semibold uppercase text-cyan-300">Architecture review</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-normal">
-                Want to discuss similar AI, data, or Salesforce architecture work?
-              </h2>
-              <p className="mt-4 text-sm leading-6 text-slate-300">
-                Available for consulting, implementation planning, architecture reviews, and technical advisory.
-              </p>
-            </div>
-            <Button asChild className="bg-white text-slate-950 hover:bg-slate-100" size="lg">
-              <Link href="/contact">
-                Contact Renato
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
           </div>
         </section>
       </article>

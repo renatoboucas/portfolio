@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 
-import { CredibilityStrip } from "@/components/sections/CredibilityStrip";
+import { AIAssistantSection } from "@/components/sections/AIAssistantSection";
+import { CertificationsStrip } from "@/components/sections/CertificationsStrip";
+import { CoreExpertise } from "@/components/sections/CoreExpertise";
 import { CTASection } from "@/components/sections/CTASection";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { FeaturedInsights } from "@/components/sections/FeaturedInsights";
 import { Hero } from "@/components/sections/Hero";
-import { PositioningSection } from "@/components/sections/PositioningSection";
-import { TechStack } from "@/components/sections/TechStack";
-import { WhatIDo } from "@/components/sections/WhatIDo";
 
 export const metadata: Metadata = {
-  title: "Renato Boucas | AI, Data Engineering & Salesforce Architecture",
+  title: "Renato Boucas | AI Architect",
   description:
-    "AI implementation, LLM/RAG, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and marketing automation architecture portfolio.",
+    "AI Architect portfolio focused on LLM/RAG systems, data engineering, Salesforce architecture, CRM/CDP activation, and practical business automation.",
   keywords: [
     "AI implementation consultant",
+    "AI Architect",
     "LLM consultant",
     "RAG architecture",
     "data engineering consultant",
@@ -33,12 +33,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <CredibilityStrip />
-      <WhatIDo />
+      <CertificationsStrip />
       <FeaturedProjects />
+      <CoreExpertise />
+      <AIAssistantSection />
       <FeaturedInsights />
-      <PositioningSection />
-      <TechStack />
       <CTASection />
     </>
   );

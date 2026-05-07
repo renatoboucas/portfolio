@@ -1,52 +1,57 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+
+const focusAreas = [
+  "LLM/RAG Architecture",
+  "AI Workflow Automation",
+  "Salesforce Marketing Cloud",
+  "Data Cloud & CRM/CDP",
+  "Data Engineering",
+  "Marketing Automation",
+];
 
 export function Hero() {
   return (
-    <section className="border-b bg-white">
+    <section className="border-b bg-[linear-gradient(135deg,_#ffffff_0%,_#f8fafc_58%,_#edf8fb_100%)]">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div className="max-w-4xl">
-          <Badge className="mb-6 border-slate-200 bg-white text-slate-700 hover:bg-white" variant="outline">
-            AI Implementation • LLM/RAG • Data Engineering • Salesforce Architecture
-          </Badge>
-          <h1 className="text-4xl font-bold tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
-            Practical AI, data, and Salesforce architecture for customer systems.
+        <div className="max-w-5xl">
+          <p className="text-base font-semibold text-slate-950">Renato Boucas</p>
+          <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-cyan-700">
+            AI Architect | Data Engineering | Salesforce & CRM/CDP Architecture
+          </p>
+          <h1 className="mt-6 text-4xl font-bold tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
+            AI Architect for data, Salesforce, and practical business automation.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-            I help teams connect LLMs, trusted data, Salesforce ecosystems, and marketing
-            technology into workflows that are useful, maintainable, and built for real execution.
+            I design AI-enabled systems that connect LLMs, trusted data, Salesforce ecosystems,
+            and business workflows into practical solutions teams can use and maintain.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-wrap gap-2">
+            {focusAreas.map((area) => (
+              <span
+                className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-700"
+                key={area}
+              >
+                {area}
+              </span>
+            ))}
+          </div>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg">
               <Link href="/projects">
-                View Case Studies
+                View Work
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/services">Explore Services</Link>
-            </Button>
-            <Button asChild size="lg" variant="ghost">
-              <Link href="/contact">Contact</Link>
+              <Link href="/ask">Ask AI Assistant</Link>
             </Button>
           </div>
         </div>
-        <div className="mt-12 grid gap-6 border-t pt-8 text-sm text-slate-600 sm:grid-cols-3">
-          <p>
-            <span className="block font-semibold text-slate-950">AI and RAG</span>
-            LLM applications, trusted knowledge, assistant workflows, and guardrails.
-          </p>
-          <p>
-            <span className="block font-semibold text-slate-950">Data engineering</span>
-            Customer data flows, CRM/CDP activation, segmentation, and reporting foundations.
-          </p>
-          <p>
-            <span className="block font-semibold text-slate-950">Salesforce architecture</span>
-            Marketing Cloud, Data Cloud, journeys, consent, and marketing automation.
-          </p>
+        <div className="mt-12 border-t pt-6 text-sm text-slate-600">
+          <p>14+ years across IT, data, cloud, marketing technology, and platform architecture.</p>
         </div>
       </div>
     </section>

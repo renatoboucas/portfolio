@@ -1,11 +1,11 @@
 export type Certification = {
   title: string;
   issuer: string;
-  category: string;
+  category: "Salesforce" | "AI" | "Cloud" | "Data" | "Other";
   status: "Active" | "Planned" | "In Progress";
-  year?: string;
-  url?: string;
-  logoSrc?: string;
+  logo?: string;
+  credentialUrl?: string;
+  issuedAt?: string;
   logoAlt?: string;
 };
 

@@ -4,22 +4,28 @@ import { services } from "@/data/services";
 
 const serviceGroups = [
   {
-    title: "AI implementation",
+    title: "AI Architecture",
     summary:
-      "LLM/RAG strategy, internal assistants, workflow automation, and practical AI rollout planning.",
+      "LLM/RAG strategy, AI assistants, workflow automation, model/provider selection, and governance basics.",
     match: ["AI", "AI / LLM", "AI Automation"],
   },
   {
-    title: "Data engineering",
+    title: "Data Engineering",
     summary:
-      "Customer data pipelines, source-to-target mapping, reporting models, and CRM/CDP activation.",
-    match: ["Data Engineering", "Analytics"],
+      "Data pipelines, warehouse/CDP integration, customer profile modeling, reverse ETL, and reporting-ready datasets.",
+    match: ["Data Engineering"],
   },
   {
-    title: "Salesforce architecture",
+    title: "Salesforce & CRM/CDP",
     summary:
-      "Marketing Cloud, Data Cloud, journeys, consent, preference centers, and MarTech operations.",
-    match: ["Salesforce / MarTech", "Salesforce / Data Cloud", "Consent / Governance"],
+      "SFMC architecture, Data Cloud readiness, CRM/CDP activation, preference centers, and journey audits.",
+    match: ["Salesforce / MarTech", "Salesforce / Data Cloud"],
+  },
+  {
+    title: "Marketing Technology",
+    summary:
+      "Campaign operations, consent architecture, analytics automation, migration planning, and platform cleanup.",
+    match: ["Consent / Governance", "Analytics"],
   },
 ];
 
@@ -31,11 +37,11 @@ export function ServicesGrid() {
           <div>
             <p className="text-sm font-semibold uppercase text-cyan-700">What I do</p>
             <h2 className="mt-3 text-3xl font-bold tracking-normal text-slate-950 sm:text-4xl">
-              I help teams make AI, data, and Salesforce work together.
+              Four clear service pillars.
             </h2>
             <p className="mt-5 text-base leading-7 text-slate-600">
-              The focus is implementation clarity: what problem needs to be solved, what data can
-              be trusted, what systems need to connect, and how the workflow will operate after launch.
+              Concise architecture and implementation support for teams that need less noise and a
+              clearer path from idea to execution.
             </p>
           </div>
           <div className="divide-y divide-slate-200 border-y">

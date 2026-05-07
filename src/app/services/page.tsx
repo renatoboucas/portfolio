@@ -31,15 +31,11 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="text-sm font-semibold uppercase text-cyan-700">Services</p>
           <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-normal text-slate-950 sm:text-5xl">
-            Services for AI, Data, and Salesforce Execution
+            Services for AI architecture, data, and Salesforce execution
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-            I help teams turn AI ideas, customer data, and Salesforce ecosystems into practical systems
-            that support marketing, operations, customer experience, and business decision-making.
-          </p>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            The work spans broader AI implementation, LLM/RAG design, data engineering, Salesforce
-            Marketing Cloud, Data Cloud, CRM/CDP activation, consent architecture, and marketing automation.
+            I help teams clarify what to build, how the data should move, and how Salesforce,
+            marketing platforms, and AI workflows should connect.
           </p>
         </div>
       </section>

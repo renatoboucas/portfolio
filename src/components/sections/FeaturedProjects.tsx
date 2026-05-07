@@ -2,21 +2,21 @@ import { ProjectCard } from "@/components/cards/ProjectCard";
 import { projects } from "@/data/projects";
 
 export function FeaturedProjects() {
-  const featuredProjects = projects.filter((project) => project.featured);
+  const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
 
   return (
-    <section className="bg-slate-50 py-20">
+    <section className="bg-white py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase text-cyan-700">Featured projects</p>
           <h2 className="mt-3 text-3xl font-bold tracking-normal text-slate-950 sm:text-4xl">
-            Proof-oriented previews across AI, RAG, Salesforce, data, and campaign systems.
+            Selected case studies.
           </h2>
           <p className="mt-5 text-base leading-7 text-slate-600">
-            These previews use the static project model from Sprint 1 and point toward future case study routes.
+            A focused preview of work across AI assistants, RAG architecture, and CRM/CDP data activation.
           </p>
         </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
           {featuredProjects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}

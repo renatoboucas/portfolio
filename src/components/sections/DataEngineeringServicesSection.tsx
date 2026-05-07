@@ -1,6 +1,3 @@
-import { DatabaseZap } from "lucide-react";
-import { DataPipelineVisual } from "@/components/visuals/DataPipelineVisual";
-
 const focusPoints = [
   "Customer data pipelines",
   "Source-to-target mapping",
@@ -14,7 +11,7 @@ const focusPoints = [
 
 export function DataEngineeringServicesSection() {
   return (
-    <section className="bg-slate-50 py-20">
+    <section className="bg-slate-50 py-16">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
         <div>
           <p className="text-sm font-semibold uppercase text-cyan-700">Data engineering</p>
@@ -27,16 +24,12 @@ export function DataEngineeringServicesSection() {
             more accurate and reliable.
           </p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
           {focusPoints.map((point) => (
-            <div className="flex gap-3 rounded-lg border bg-white p-4" key={point}>
-              <DatabaseZap className="mt-0.5 h-5 w-5 shrink-0 text-cyan-700" />
-              <p className="text-sm leading-6 text-slate-700">{point}</p>
-            </div>
+            <p className="border-t py-3 text-sm leading-6 text-slate-700" key={point}>
+              {point}
+            </p>
           ))}
-        </div>
-        <div className="lg:col-span-2">
-          <DataPipelineVisual />
         </div>
       </div>
     </section>

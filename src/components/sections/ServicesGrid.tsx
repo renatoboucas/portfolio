@@ -15,7 +15,7 @@ export function ServicesGrid() {
             and the operating details that make systems usable after launch.
           </p>
         </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-4">
           {services.map((service) => (
             <ServiceCard key={service.slug} service={service} />
           ))}

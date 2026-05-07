@@ -1,14 +1,7 @@
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
 
 import { MobileNav } from "@/components/layout/MobileNav";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { navLinks } from "@/data/navigation";
 
 export function Header() {
@@ -24,23 +17,15 @@ export function Header() {
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
           {navLinks.map((link) => (
-            <Button asChild key={link.href} variant="ghost">
+            <Button
+              asChild
+              className={link.href === "/ask" ? "bg-slate-950 text-white hover:bg-slate-800 hover:text-white" : ""}
+              key={link.href}
+              variant={link.href === "/ask" ? "default" : "ghost"}
+            >
               <Link href={link.href}>{link.label}</Link>
             </Button>
           ))}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost">
-                Future
-                <ChevronDown className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {["AI Work", "Blog", "Resume"].map((label) => (
-                <DropdownMenuItem key={label}>{label}</DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
         </nav>
 
         <MobileNav />

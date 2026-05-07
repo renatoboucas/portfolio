@@ -9,6 +9,7 @@ Professional portfolio for Renato Boucas, focused on AI implementation, LLM/RAG 
 - Tailwind CSS
 - shadcn/ui-compatible components
 - Static data files for projects, services, skills, certifications, and contact details
+- Vercel AI SDK with OpenAI for the AI Portfolio Assistant
 - Vercel-ready deployment structure
 
 ## Local Development
@@ -42,9 +43,80 @@ Copy `.env.example` if needed and set the production URL:
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
+OPENAI_API_KEY=
 ```
 
 This value is used for metadata, canonical URLs, sitemap, robots, and social sharing URLs. If it is not set, the site falls back to `https://your-domain.com`.
+
+`OPENAI_API_KEY` is used only by the server-side `/api/chat` route. Do not expose it as a `NEXT_PUBLIC_` variable.
+
+## AI Portfolio Assistant
+
+The `/ask` page contains Renato's AI Portfolio Assistant, a lightweight RAG-style portfolio demo.
+
+The assistant:
+
+- Answers questions about public portfolio content.
+- Uses curated Markdown knowledge files from `content/knowledge`.
+- Retrieves relevant chunks before calling the model.
+- Streams responses from the server-side `/api/chat` route.
+- Uses OpenAI through the Vercel AI SDK.
+- Includes guardrails so it does not impersonate Renato or invent private details.
+
+Local setup:
+
+1. Create `.env.local`.
+2. Add:
+
+```bash
+OPENAI_API_KEY=your_openai_api_key
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+3. Run `npm run dev`.
+4. Open `http://localhost:3000/ask`.
+
+Vercel setup:
+
+1. Open the Vercel project settings.
+2. Add `OPENAI_API_KEY` as a production environment variable.
+3. Keep `NEXT_PUBLIC_SITE_URL` set to the production domain.
+4. Redeploy.
+
+### Assistant Knowledge Base
+
+Knowledge files live in `content/knowledge`.
+
+Current files:
+
+- `renato-profile.md`
+- `projects.md`
+- `services.md`
+- `skills.md`
+- `ai-positioning.md`
+- `salesforce-experience.md`
+- `data-engineering.md`
+- `consulting-style.md`
+- `faq.md`
+
+To update the assistant, edit the Markdown files, keep the content public and accurate, and run `npm run build`.
+
+Retrieval logic lives in `src/lib/ai/retrieveKnowledge.ts`.
+
+Prompt guardrails live in `src/lib/ai/prompts.ts`.
+
+The current retrieval is keyword-based and intentionally simple. A future upgrade can replace it with embeddings, Supabase pgvector, Neon, Pinecone, source citations, evaluation sets, lead capture, or multi-provider support for Anthropic Claude and Google Gemini.
+
+### Assistant Guardrails
+
+The assistant should:
+
+- Identify as Renato's AI Portfolio Assistant.
+- Say it uses public portfolio content.
+- Avoid saying "I am Renato."
+- Refuse unsupported private, confidential, availability, compensation, or rates questions.
+- Recommend contacting Renato directly when the context does not support an answer.
+- Avoid inventing certifications, employers, clients, metrics, private details, or guarantees.
 
 ## Contact Configuration
 
@@ -261,11 +333,11 @@ git clone https://github.com/renatoboucas/portfolio.git
 cd portfolio
 ```
 
-2. Confirm and update `main`.
+2. Confirm and update the production branch. This repository currently uses `master`.
 
 ```bash
-git checkout main
-git pull origin main
+git checkout master
+git pull origin master
 ```
 
 3. Create and push a backup branch.
@@ -275,10 +347,10 @@ git checkout -b backup/old-portfolio
 git push origin backup/old-portfolio
 ```
 
-4. Return to `main`.
+4. Return to the production branch.
 
 ```bash
-git checkout main
+git checkout master
 ```
 
 5. Remove old files while keeping `.git`.
@@ -319,7 +391,7 @@ npm run build
 ```bash
 git add .
 git commit -m "Replace old portfolio with AI data Salesforce portfolio"
-git push origin main
+git push origin master
 ```
 
 Do not delete the GitHub repository itself. The previous version remains available on `backup/old-portfolio`.
@@ -330,6 +402,7 @@ After deployment, verify:
 
 - `/`
 - `/projects`
+- `/projects/ai-portfolio-assistant-lightweight-rag`
 - `/projects/ai-marketing-operations-assistant`
 - `/projects/rag-knowledge-base-customer-support`
 - `/projects/data-engineering-crm-cdp-activation`
@@ -338,6 +411,7 @@ After deployment, verify:
 - `/projects/vbtc-campaign-analytics-automation`
 - `/services`
 - `/about`
+- `/ask`
 - `/contact`
 - `/insights`
 - `/insights/why-ai-projects-need-data-architecture`
@@ -361,6 +435,10 @@ Also verify invalid project and insight URLs return the custom 404 page.
 - All project detail pages load.
 - Services page loads.
 - About page loads.
+- Ask AI page loads.
+- AI assistant returns a grounded response when `OPENAI_API_KEY` is configured.
+- AI assistant does not impersonate Renato.
+- AI assistant refuses unsupported private/confidential questions.
 - Contact page loads.
 - Insights page loads.
 - All insight article pages load.
@@ -417,6 +495,14 @@ Update images and visuals:
 2. Add project visuals to `public/images/projects`.
 3. Update `image` or `visualType` in the relevant data file.
 4. Avoid confidential client screenshots or exact production architecture diagrams.
+
+Update assistant knowledge:
+
+1. Open `content/knowledge`.
+2. Edit the relevant Markdown file.
+3. Keep the content public and supportable.
+4. Run `npm run build`.
+5. Commit and push.
 
 ## Maintenance Cadence
 

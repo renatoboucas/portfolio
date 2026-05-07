@@ -23,6 +23,71 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "ai-portfolio-assistant-lightweight-rag",
+    title: "AI Portfolio Assistant with Lightweight RAG",
+    category: "AI Implementation",
+    summary:
+      "Built an AI assistant for this portfolio that answers questions about Renato's work, services, projects, and background using curated knowledge content and retrieval-augmented generation.",
+    longSummary:
+      "A live AI/RAG portfolio demo that uses curated public knowledge, lightweight retrieval, prompt guardrails, and a streaming chat UI to help visitors explore Renato's experience interactively.",
+    context:
+      "A static portfolio can show experience, but it does not demonstrate how Renato thinks about AI implementation or help visitors quickly explore the parts of his background most relevant to their needs.",
+    problem:
+      "Visitors may want to ask targeted questions about AI implementation, RAG, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, services, and project examples without reading every page manually.",
+    role:
+      "AI implementation architect, knowledge architecture designer, prompt guardrail planner, and Next.js implementation lead.",
+    solution:
+      "Built Renato's AI Portfolio Assistant as a dedicated /ask experience. The assistant retrieves curated Markdown knowledge about Renato's public portfolio and uses an LLM to answer questions with clear boundaries.",
+    architecture:
+      "The MVP uses a local Markdown knowledge base, keyword-based chunk retrieval, a guarded system prompt, a server-side Next.js API route, Vercel AI SDK streaming, OpenAI for response generation, and a mobile-friendly chat UI. It does not access private data or confidential client systems.",
+    deliverables: [
+      "Curated public portfolio knowledge base",
+      "Lightweight retrieval utility",
+      "Guarded AI system prompt",
+      "Server-side chat API route",
+      "Streaming chat interface",
+      "Assistant page and site-wide CTA paths",
+    ],
+    impact: [
+      "Demonstrates practical AI implementation in a live portfolio",
+      "Shows RAG-style architecture without adding unnecessary infrastructure",
+      "Helps visitors quickly find relevant information about Renato's work",
+      "Differentiates the portfolio from static resume-style sites",
+      "Creates a foundation for future vector search, citations, and lead capture",
+    ],
+    focusAreas: [
+      "LLM",
+      "RAG",
+      "Next.js",
+      "Vercel AI SDK",
+      "OpenAI",
+      "Knowledge Architecture",
+      "Prompt Design",
+      "AI Guardrails",
+    ],
+    tools: [
+      "Next.js",
+      "Vercel",
+      "Vercel AI SDK",
+      "OpenAI",
+      "TypeScript",
+      "Tailwind CSS",
+      "Markdown Knowledge Base",
+    ],
+    challenges: [
+      "Keeping the assistant grounded in public portfolio content",
+      "Avoiding impersonation or unsupported claims",
+      "Providing a useful demo without adding unnecessary infrastructure",
+    ],
+    lessonsLearned: [
+      "A small RAG demo can communicate implementation judgment when it has clear context and boundaries.",
+      "Guardrails and knowledge curation are as important as the model call in a public assistant.",
+    ],
+    visualType: "ai-workflow",
+    diagramLabel: "Lightweight RAG workflow for the portfolio assistant",
+    featured: true,
+  },
+  {
     slug: "ai-marketing-operations-assistant",
     title: "AI Marketing Operations Assistant",
     category: "AI Implementation",

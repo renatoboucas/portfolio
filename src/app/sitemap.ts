@@ -5,7 +5,7 @@ import { insights } from "@/data/insights";
 import { absoluteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["/", "/projects", "/services", "/insights", "/about", "/contact"];
+  const staticRoutes = ["/", "/projects", "/services", "/insights", "/about", "/ask", "/contact"];
   const projectRoutes = projects.map((project) => `/projects/${project.slug}`);
   const insightRoutes = insights.map((insight) => `/insights/${insight.slug}`);
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { CredibilityStrip } from "@/components/sections/CredibilityStrip";
 import { CTASection } from "@/components/sections/CTASection";
+import { AIAssistantSection } from "@/components/sections/AIAssistantSection";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { FeaturedInsights } from "@/components/sections/FeaturedInsights";
 import { Hero } from "@/components/sections/Hero";
@@ -35,6 +36,7 @@ export default function Home() {
       <Hero />
       <CredibilityStrip />
       <WhatIDo />
+      <AIAssistantSection />
       <FeaturedProjects />
       <FeaturedInsights />
       <PositioningSection />

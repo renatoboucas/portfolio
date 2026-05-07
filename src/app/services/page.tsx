@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { AIDemoCTA } from "@/components/sections/AIDemoCTA";
 import { AIServicesSection } from "@/components/sections/AIServicesSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { DataEngineeringServicesSection } from "@/components/sections/DataEngineeringServicesSection";
@@ -51,6 +52,7 @@ export default function ServicesPage() {
 
       <ServicesGrid />
       <AIServicesSection />
+      <AIDemoCTA />
       <SalesforceServicesSection />
       <DataEngineeringServicesSection />
       <EngagementModels />

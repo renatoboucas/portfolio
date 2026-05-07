@@ -30,26 +30,17 @@ export function MobileNav() {
           {navLinks.map((link) => (
             <SheetClose asChild key={link.href}>
               <Link
-                className="rounded-md px-3 py-2 text-base font-semibold text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-950"
+                className={`rounded-md px-3 py-2 text-base font-semibold transition-colors ${
+                  link.href === "/ask"
+                    ? "bg-slate-950 text-white hover:bg-slate-800"
+                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950"
+                }`}
                 href={link.href}
               >
                 {link.label}
               </Link>
             </SheetClose>
           ))}
-          <div className="mt-4 border-t pt-4">
-            <p className="mb-2 px-3 text-xs font-semibold uppercase text-slate-500">
-              Future sections
-            </p>
-            {["AI Work", "Blog", "Resume"].map((label) => (
-              <span
-                className="block rounded-md px-3 py-2 text-sm font-medium text-slate-500"
-                key={label}
-              >
-                {label}
-              </span>
-            ))}
-          </div>
         </nav>
       </SheetContent>
     </Sheet>

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Bot, Maximize2, MessageCircle, Minus, Send, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Bot, MessageCircle, Minus, Send, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { contactInfo, mailtoLink } from "@/data/contact";
@@ -13,6 +13,7 @@ type ChatMessage = {
 };
 
 type LeadIntent = "contact" | "resume" | null;
+type LeadStep = "name" | "context" | null;
 
 const starterQuestions = [
   "What AI implementation work does Renato do?",
@@ -22,6 +23,18 @@ const starterQuestions = [
 
 const contactIntentPattern = /\b(contact|email|reach out|connect|talk|speak|hire|consulting|consultation)\b/i;
 const resumeIntentPattern = /\b(resume|cv|curriculum|background summary)\b/i;
+const STORAGE_KEY = "renato-floating-assistant";
+const initialAssistantMessage =
+  "Hi, I am Renato's AI Portfolio Assistant. Ask about Renato's projects, services, AI/RAG work, Salesforce experience, or data engineering background.";
+
+type StoredAssistantSession = {
+  isOpen?: boolean;
+  messages?: ChatMessage[];
+  leadIntent?: LeadIntent;
+  leadStep?: LeadStep;
+  leadName?: string;
+  leadContext?: string;
+};
 
 function createMessage(role: ChatMessage["role"], content: string): ChatMessage {
   return {
@@ -31,53 +44,120 @@ function createMessage(role: ChatMessage["role"], content: string): ChatMessage 
   };
 }
 
+function getStoredAssistantSession(): StoredAssistantSession {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
+  const stored = window.sessionStorage.getItem(STORAGE_KEY);
+
+  if (!stored) {
+    return {};
+  }
+
+  try {
+    return JSON.parse(stored) as StoredAssistantSession;
+  } catch {
+    window.sessionStorage.removeItem(STORAGE_KEY);
+    return {};
+  }
+}
+
 export function FloatingAssistant() {
-  const [isOpen, setIsOpen] = useState(true);
+  const storedSession = getStoredAssistantSession();
+
+  const [isOpen, setIsOpen] = useState(storedSession.isOpen ?? true);
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    createMessage(
-      "assistant",
-      "Hi, I am Renato's AI Portfolio Assistant. Ask about Renato's projects, services, AI/RAG work, Salesforce experience, or data engineering background.",
-    ),
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>(
+    Array.isArray(storedSession.messages) && storedSession.messages.length > 0
+      ? storedSession.messages
+      : [createMessage("assistant", initialAssistantMessage)],
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [leadIntent, setLeadIntent] = useState<LeadIntent>(null);
-  const [leadName, setLeadName] = useState("");
-  const [leadContext, setLeadContext] = useState("");
+  const [leadIntent, setLeadIntent] = useState<LeadIntent>(storedSession.leadIntent ?? null);
+  const [leadStep, setLeadStep] = useState<LeadStep>(storedSession.leadStep ?? null);
+  const [leadName, setLeadName] = useState(storedSession.leadName ?? "");
+  const [leadContext, setLeadContext] = useState(storedSession.leadContext ?? "");
+
+  useEffect(() => {
+    window.sessionStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        isOpen,
+        messages,
+        leadIntent,
+        leadStep,
+        leadName,
+        leadContext,
+      }),
+    );
+  }, [isOpen, messages, leadIntent, leadStep, leadName, leadContext]);
 
   function openLeadFlow(intent: Exclude<LeadIntent, null>) {
     setLeadIntent(intent);
+    setLeadStep("name");
+    setLeadName("");
+    setLeadContext("");
     setMessages((current) => [
       ...current,
       createMessage(
         "assistant",
         intent === "resume"
-          ? "I can help you request Renato's resume. Please share your name and what Renato should know before he replies."
-          : "I can help you start an email to Renato. Please share your name and what Renato should know before he replies.",
+          ? "I can help you request Renato's resume. What is your name?"
+          : "I can help you start an email to Renato. What is your name?",
       ),
     ]);
   }
 
-  function submitLeadRequest() {
-    const name = leadName.trim();
-    const context = leadContext.trim();
-
-    if (!name || !context || !leadIntent) {
-      setError("Please add your name and a short note before continuing.");
-      return;
-    }
-
-    setError("");
-
+  function openEmailDraft(intent: Exclude<LeadIntent, null>, name: string, context: string) {
     const subject =
-      leadIntent === "resume" ? "Resume Request from Portfolio" : "Portfolio Contact Request";
+      intent === "resume" ? "Resume Request from Portfolio" : "Portfolio Contact Request";
     const body =
-      leadIntent === "resume"
+      intent === "resume"
         ? `Hi Renato,\n\nMy name is ${name}.\n\nCould you please send me your current resume?\n\nWhat Renato should know before replying:\n${context}`
         : `Hi Renato,\n\nMy name is ${name}.\n\nI found your portfolio and would like to connect.\n\nWhat Renato should know before replying:\n${context}`;
 
-    window.location.href = mailtoLink(subject, body);
+    window.location.assign(mailtoLink(subject, body));
+  }
+
+  function handleLeadConversation(trimmed: string, userMessage: ChatMessage) {
+    if (!leadIntent || !leadStep) {
+      return false;
+    }
+
+    if (leadStep === "name") {
+      setLeadName(trimmed);
+      setLeadStep("context");
+      setMessages((current) => [
+        ...current,
+        userMessage,
+        createMessage(
+          "assistant",
+          leadIntent === "resume"
+            ? `Thanks, ${trimmed}. What should Renato know before sending the resume?`
+            : `Thanks, ${trimmed}. What should Renato know before he replies?`,
+        ),
+      ]);
+      return true;
+    }
+
+    const name = leadName || "there";
+    setLeadContext(trimmed);
+    setMessages((current) => [
+      ...current,
+      userMessage,
+      createMessage(
+        "assistant",
+        "Got it. I am opening a prefilled email draft now. You can review it before sending.",
+      ),
+    ]);
+    openEmailDraft(leadIntent, name, trimmed);
+    setLeadIntent(null);
+    setLeadStep(null);
+    setLeadName("");
+    setLeadContext("");
+    return true;
   }
 
   async function sendQuestion(question = input) {
@@ -93,6 +173,12 @@ export function FloatingAssistant() {
 
     const userMessage = createMessage("user", trimmed);
     const assistantMessage = createMessage("assistant", "");
+
+    if (handleLeadConversation(trimmed, userMessage)) {
+      setIsLoading(false);
+      return;
+    }
+
     const requestMessages = [...messages, userMessage]
       .filter((message) => message.role === "user" || message.role === "assistant")
       .slice(-8);
@@ -190,15 +276,12 @@ export function FloatingAssistant() {
           </span>
           <div>
             <p className="text-sm font-semibold text-slate-950">AI Portfolio Assistant</p>
-            <p className="text-xs text-slate-500">Public portfolio answers</p>
+            <p className="text-xs text-slate-500">
+              {leadIntent ? "Contact flow" : "Public portfolio answers"}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <Button asChild aria-label="Open full assistant page" size="icon" variant="ghost">
-            <a href="/ask">
-              <Maximize2 className="h-4 w-4" />
-            </a>
-          </Button>
           <Button aria-label="Minimize assistant" onClick={() => setIsOpen(false)} size="icon" variant="ghost">
             <Minus className="h-4 w-4" />
           </Button>
@@ -243,51 +326,6 @@ export function FloatingAssistant() {
         </div>
 
         {error && <p className="text-xs leading-5 text-red-600">{error}</p>}
-
-        {leadIntent && (
-          <div className="rounded-xl border bg-slate-50 p-3">
-            <p className="text-sm font-semibold text-slate-950">
-              {leadIntent === "resume" ? "Request resume" : "Start a conversation"}
-            </p>
-            <div className="mt-3 grid gap-2">
-              <label className="grid gap-1 text-xs font-medium text-slate-600">
-                Your name
-                <input
-                  className="rounded-md border bg-white px-3 py-2 text-sm font-normal text-slate-950 outline-none focus:border-slate-500"
-                  onChange={(event) => setLeadName(event.target.value)}
-                  placeholder="Jane Smith"
-                  value={leadName}
-                />
-              </label>
-              <label className="grid gap-1 text-xs font-medium text-slate-600">
-                What should Renato know before he replies?
-                <textarea
-                  className="min-h-20 resize-none rounded-md border bg-white px-3 py-2 text-sm font-normal text-slate-950 outline-none focus:border-slate-500"
-                  onChange={(event) => setLeadContext(event.target.value)}
-                  placeholder="Share the role, project, question, or reason for reaching out."
-                  value={leadContext}
-                />
-              </label>
-              <div className="flex gap-2">
-                <Button className="flex-1" onClick={submitLeadRequest} size="sm" type="button">
-                  Open email draft
-                </Button>
-                <Button
-                  onClick={() => {
-                    setLeadIntent(null);
-                    setLeadName("");
-                    setLeadContext("");
-                  }}
-                  size="sm"
-                  type="button"
-                  variant="outline"
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
 
         <form
           className="flex gap-2"

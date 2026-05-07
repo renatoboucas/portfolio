@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { FloatingAssistant } from "@/components/ai/FloatingAssistant";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { absoluteUrl, siteConfig } from "@/lib/site";
@@ -57,6 +58,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <FloatingAssistant />
         <Analytics />
       </body>
     </html>

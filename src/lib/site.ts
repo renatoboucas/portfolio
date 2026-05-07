@@ -13,7 +13,6 @@ export const siteConfig = {
     { label: "Services", href: "/services" },
     { label: "Insights", href: "/insights" },
     { label: "About", href: "/about" },
-    { label: "Ask AI", href: "/ask" },
     { label: "Contact", href: "/contact" },
   ],
   keywords: [

@@ -24,7 +24,7 @@ export function AIDemoCTA() {
               </p>
             </div>
             <Button asChild size="lg">
-              <Link href="/ask">
+              <Link href="#ask-ai">
                 Ask the Portfolio Assistant
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -35,4 +35,3 @@ export function AIDemoCTA() {
     </section>
   );
 }
-

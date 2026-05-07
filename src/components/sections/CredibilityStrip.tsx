@@ -1,5 +1,5 @@
 const points = [
-  "14+ years across IT, data, cloud, and marketing technology",
+  "16+ years across IT, data, cloud, and marketing technology",
   "Salesforce Marketing Cloud, Data Cloud, and CRM/CDP activation",
   "AI implementation, LLM/RAG strategy, and practical automation",
 ];

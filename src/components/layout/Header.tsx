@@ -19,9 +19,9 @@ export function Header() {
           {navLinks.map((link) => (
             <Button
               asChild
-              className={link.href === "/ask" ? "border-slate-300 bg-white text-slate-950 hover:bg-slate-50" : ""}
+              className={link.href === "#ask-ai" ? "border-slate-300 bg-white text-slate-950 hover:bg-slate-50" : ""}
               key={link.href}
-              variant={link.href === "/ask" ? "outline" : "ghost"}
+              variant={link.href === "#ask-ai" ? "outline" : "ghost"}
             >
               <Link href={link.href}>{link.label}</Link>
             </Button>

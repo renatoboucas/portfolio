@@ -1,5 +1,5 @@
 const highlights = [
-  "14+ years across IT, data, cloud, marketing technology, and platform architecture",
+  "16+ years across IT, data, cloud, marketing technology, and platform architecture",
   "Salesforce Marketing Cloud architecture and implementation",
   "Preference center and publication list architecture",
   "Data engineering and CRM/CDP activation",

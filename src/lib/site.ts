@@ -8,11 +8,12 @@ export const siteConfig = {
   ogImage: "/og-image.png",
   profileImage: "/images/renato-profile.jpg",
   nav: [
+    { label: "Home", href: "/" },
     { label: "Work", href: "/projects" },
     { label: "Services", href: "/services" },
     { label: "Insights", href: "/insights" },
     { label: "About", href: "/about" },
-    { label: "Ask AI", href: "/ask" },
+    { label: "Ask AI", href: "#ask-ai" },
     { label: "Contact", href: "/contact" },
   ],
   keywords: [

@@ -32,7 +32,7 @@ export function AIAssistantSection() {
             ))}
           </ul>
           <Button asChild className="mt-7 bg-white text-slate-950 hover:bg-slate-100" size="lg">
-            <Link href="/ask">
+            <Link href="#ask-ai">
               <Bot className="h-4 w-4" />
               Ask AI Assistant
               <ArrowRight className="h-4 w-4" />

@@ -31,7 +31,7 @@ export function MobileNav() {
             <SheetClose asChild key={link.href}>
               <Link
                 className={`rounded-md px-3 py-2 text-base font-semibold transition-colors ${
-                  link.href === "/ask"
+                  link.href === "#ask-ai"
                     ? "border border-slate-200 text-slate-950 hover:bg-slate-100"
                     : "text-slate-700 hover:bg-slate-100 hover:text-slate-950"
                 }`}

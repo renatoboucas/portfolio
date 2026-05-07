@@ -94,6 +94,40 @@ export function FloatingAssistant() {
     );
   }, [isOpen, messages, leadIntent, leadStep, leadName, leadContext]);
 
+  useEffect(() => {
+    function openAssistantFromLink(event?: Event) {
+      if (event) {
+        event.preventDefault();
+      }
+
+      setIsOpen(true);
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
+    function handleHashChange() {
+      if (window.location.hash === "#ask-ai") {
+        openAssistantFromLink();
+      }
+    }
+
+    function handleDocumentClick(event: MouseEvent) {
+      const target = event.target instanceof Element ? event.target.closest("a") : null;
+
+      if (target?.getAttribute("href") === "#ask-ai") {
+        openAssistantFromLink(event);
+      }
+    }
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, []);
+
   function openLeadFlow(intent: Exclude<LeadIntent, null>) {
     setLeadIntent(intent);
     setLeadStep("name");

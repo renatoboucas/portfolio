@@ -46,12 +46,12 @@ export function Hero() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/ask">Ask AI Assistant</Link>
+              <Link href="#ask-ai">Ask AI Assistant</Link>
             </Button>
           </div>
         </div>
         <div className="mt-12 border-t pt-6 text-sm text-slate-600">
-          <p>14+ years across IT, data, cloud, marketing technology, and platform architecture.</p>
+          <p>16+ years across IT, data, cloud, marketing technology, and platform architecture.</p>
         </div>
       </div>
     </section>

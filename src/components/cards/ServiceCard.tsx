@@ -21,9 +21,9 @@ export function ServiceCard({ service }: ServiceCardProps) {
       <p className="mt-4 text-sm leading-6 text-slate-600">{service.summary}</p>
       <Link
         className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-950 hover:text-cyan-700"
-        href={`/services#${service.slug}`}
+        href={`/services/${service.slug}`}
       >
-        View focus
+        View details
         <ArrowDownRight className="h-4 w-4" />
       </Link>
     </article>

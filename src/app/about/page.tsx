@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 
 import { AboutHero } from "@/components/sections/AboutHero";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
-import { ConsultingPhilosophy } from "@/components/sections/ConsultingPhilosophy";
 import { CTASection } from "@/components/sections/CTASection";
 import { ExperienceHighlights } from "@/components/sections/ExperienceHighlights";
 import { PersonalNote } from "@/components/sections/PersonalNote";
 import { ProfessionalStory } from "@/components/sections/ProfessionalStory";
 import { TechStack } from "@/components/sections/TechStack";
-import { WhatIBring } from "@/components/sections/WhatIBring";
 
 export const metadata: Metadata = {
   title: "About | Renato Boucas",
@@ -34,11 +32,9 @@ export default function AboutPage() {
     <>
       <AboutHero />
       <ProfessionalStory />
-      <WhatIBring />
       <ExperienceHighlights />
       <TechStack />
       <CertificationsSection />
-      <ConsultingPhilosophy />
       <PersonalNote />
       <CTASection />
     </>

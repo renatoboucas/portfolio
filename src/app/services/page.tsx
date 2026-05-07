@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 
-import { AIDemoCTA } from "@/components/sections/AIDemoCTA";
-import { AIServicesSection } from "@/components/sections/AIServicesSection";
 import { CTASection } from "@/components/sections/CTASection";
-import { DataEngineeringServicesSection } from "@/components/sections/DataEngineeringServicesSection";
-import { EngagementModels } from "@/components/sections/EngagementModels";
-import { SalesforceServicesSection } from "@/components/sections/SalesforceServicesSection";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
-import { WhoThisIsFor } from "@/components/sections/WhoThisIsFor";
 
 export const metadata: Metadata = {
   title: "Services | Renato Boucas",
@@ -51,12 +45,6 @@ export default function ServicesPage() {
       </section>
 
       <ServicesGrid />
-      <AIServicesSection />
-      <AIDemoCTA />
-      <SalesforceServicesSection />
-      <DataEngineeringServicesSection />
-      <EngagementModels />
-      <WhoThisIsFor />
       <CTASection />
     </>
   );

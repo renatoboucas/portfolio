@@ -151,6 +151,30 @@ resumeUrl: "/resume.pdf"
 
 If `resumeUrl` is empty, the Contact page shows a request-resume CTA instead of a broken download link.
 
+## Certifications
+
+Certification data lives in:
+
+```text
+src/data/certifications.ts
+```
+
+Only verified credentials should be added. Each certification can include an optional logo:
+
+```ts
+{
+  title: "Credential name",
+  issuer: "Issuer",
+  category: "Salesforce",
+  status: "Active",
+  url: "https://credential-url.example",
+  logoSrc: "/images/certifications/issuer-logo.png",
+  logoAlt: "Issuer logo"
+}
+```
+
+Store certification logos in `public/images/certifications/` and keep them small, transparent, and web-ready. If no logo is configured, the site renders a simple issuer initials mark instead of a broken image.
+
 ## SEO and Domain Configuration
 
 Core SEO settings live in `src/lib/site.ts`.
@@ -476,6 +500,7 @@ Update services:
 1. Open `src/data/services.ts`.
 2. Edit or add service objects.
 3. Confirm `/services` renders correctly.
+4. Detail pages are generated at `/services/[slug]`, so run `npm run build` after changing slugs.
 
 Update contact info:
 

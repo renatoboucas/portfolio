@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bot, FileText, Mail, Maximize2, MessageCircle, Minus, Send, X } from "lucide-react";
+import { Bot, Maximize2, MessageCircle, Minus, Send, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { contactInfo, mailtoLink } from "@/data/contact";
@@ -12,11 +12,16 @@ type ChatMessage = {
   content: string;
 };
 
+type LeadIntent = "contact" | "resume" | null;
+
 const starterQuestions = [
   "What AI implementation work does Renato do?",
   "How does Renato approach RAG?",
   "Can Renato help with Data Cloud?",
 ];
+
+const contactIntentPattern = /\b(contact|email|reach out|connect|talk|speak|hire|consulting|consultation)\b/i;
+const resumeIntentPattern = /\b(resume|cv|curriculum|background summary)\b/i;
 
 function createMessage(role: ChatMessage["role"], content: string): ChatMessage {
   return {
@@ -37,6 +42,43 @@ export function FloatingAssistant() {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [leadIntent, setLeadIntent] = useState<LeadIntent>(null);
+  const [leadName, setLeadName] = useState("");
+  const [leadContext, setLeadContext] = useState("");
+
+  function openLeadFlow(intent: Exclude<LeadIntent, null>) {
+    setLeadIntent(intent);
+    setMessages((current) => [
+      ...current,
+      createMessage(
+        "assistant",
+        intent === "resume"
+          ? "I can help you request Renato's resume. Please share your name and what Renato should know before he replies."
+          : "I can help you start an email to Renato. Please share your name and what Renato should know before he replies.",
+      ),
+    ]);
+  }
+
+  function submitLeadRequest() {
+    const name = leadName.trim();
+    const context = leadContext.trim();
+
+    if (!name || !context || !leadIntent) {
+      setError("Please add your name and a short note before continuing.");
+      return;
+    }
+
+    setError("");
+
+    const subject =
+      leadIntent === "resume" ? "Resume Request from Portfolio" : "Portfolio Contact Request";
+    const body =
+      leadIntent === "resume"
+        ? `Hi Renato,\n\nMy name is ${name}.\n\nCould you please send me your current resume?\n\nWhat Renato should know before replying:\n${context}`
+        : `Hi Renato,\n\nMy name is ${name}.\n\nI found your portfolio and would like to connect.\n\nWhat Renato should know before replying:\n${context}`;
+
+    window.location.href = mailtoLink(subject, body);
+  }
 
   async function sendQuestion(question = input) {
     const trimmed = question.trim();
@@ -54,6 +96,19 @@ export function FloatingAssistant() {
     const requestMessages = [...messages, userMessage]
       .filter((message) => message.role === "user" || message.role === "assistant")
       .slice(-8);
+
+    const detectedLeadIntent = resumeIntentPattern.test(trimmed)
+      ? "resume"
+      : contactIntentPattern.test(trimmed)
+        ? "contact"
+        : null;
+
+    if (detectedLeadIntent) {
+      setIsLoading(false);
+      setMessages((current) => [...current, userMessage]);
+      openLeadFlow(detectedLeadIntent);
+      return;
+    }
 
     setMessages((current) => [...current, userMessage, assistantMessage]);
 
@@ -189,6 +244,51 @@ export function FloatingAssistant() {
 
         {error && <p className="text-xs leading-5 text-red-600">{error}</p>}
 
+        {leadIntent && (
+          <div className="rounded-xl border bg-slate-50 p-3">
+            <p className="text-sm font-semibold text-slate-950">
+              {leadIntent === "resume" ? "Request resume" : "Start a conversation"}
+            </p>
+            <div className="mt-3 grid gap-2">
+              <label className="grid gap-1 text-xs font-medium text-slate-600">
+                Your name
+                <input
+                  className="rounded-md border bg-white px-3 py-2 text-sm font-normal text-slate-950 outline-none focus:border-slate-500"
+                  onChange={(event) => setLeadName(event.target.value)}
+                  placeholder="Jane Smith"
+                  value={leadName}
+                />
+              </label>
+              <label className="grid gap-1 text-xs font-medium text-slate-600">
+                What should Renato know before he replies?
+                <textarea
+                  className="min-h-20 resize-none rounded-md border bg-white px-3 py-2 text-sm font-normal text-slate-950 outline-none focus:border-slate-500"
+                  onChange={(event) => setLeadContext(event.target.value)}
+                  placeholder="Share the role, project, question, or reason for reaching out."
+                  value={leadContext}
+                />
+              </label>
+              <div className="flex gap-2">
+                <Button className="flex-1" onClick={submitLeadRequest} size="sm" type="button">
+                  Open email draft
+                </Button>
+                <Button
+                  onClick={() => {
+                    setLeadIntent(null);
+                    setLeadName("");
+                    setLeadContext("");
+                  }}
+                  size="sm"
+                  type="button"
+                  variant="outline"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <form
           className="flex gap-2"
           onSubmit={(event) => {
@@ -211,21 +311,6 @@ export function FloatingAssistant() {
             <Send className="h-4 w-4" />
           </Button>
         </form>
-
-        <div className="flex gap-2">
-          <Button asChild className="flex-1" size="sm" variant="outline">
-            <a href={mailtoLink("Portfolio Contact", "Hi Renato,\n\nI found your portfolio and would like to connect about:")}>
-              <Mail className="h-4 w-4" />
-              Email
-            </a>
-          </Button>
-          <Button asChild className="flex-1" size="sm" variant="outline">
-            <a href={mailtoLink("Resume Request", "Hi Renato,\n\nCould you please send me your current resume?")}>
-              <FileText className="h-4 w-4" />
-              Resume
-            </a>
-          </Button>
-        </div>
         {contactInfo.linkedin && (
           <a
             className="block text-center text-xs font-medium text-slate-500 hover:text-slate-950"

@@ -4,7 +4,6 @@ import { ArrowRight, Bot, BrainCircuit, DatabaseZap, Network } from "lucide-reac
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArchitectureVisual } from "@/components/visuals/ArchitectureVisual";
 
 const focusAreas = [
   {
@@ -24,7 +23,7 @@ const focusAreas = [
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b bg-[radial-gradient(circle_at_18%_18%,_rgba(14,165,233,0.16),_transparent_30%),radial-gradient(circle_at_85%_10%,_rgba(20,184,166,0.12),_transparent_28%),linear-gradient(135deg,_#ffffff_0%,_#f8fafc_54%,_#eef6fb_100%)]">
-      <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
         <div>
           <Badge className="mb-5 bg-cyan-50 text-cyan-800 hover:bg-cyan-50" variant="secondary">
             AI Implementation • LLM/RAG • Data Engineering • Salesforce Architecture
@@ -74,14 +73,42 @@ export function Hero() {
         </div>
 
         <div className="grid gap-4">
-          <Card className="overflow-hidden border-slate-200/80 bg-white/95 shadow-2xl backdrop-blur">
+          <Card className="overflow-hidden border-slate-200/80 bg-white/95 shadow-xl backdrop-blur">
             <CardContent className="p-6">
-              <p className="text-sm font-semibold uppercase text-cyan-700">Positioning</p>
+              <p className="text-sm font-semibold uppercase text-cyan-700">Operating model</p>
               <p className="mt-3 text-2xl font-bold leading-tight text-slate-950">
-                Practical AI work grounded in real data, CRM workflows, and platform execution.
+                Practical AI implementation built on context, data, and platform execution.
               </p>
-              <div className="mt-6">
-                <ArchitectureVisual />
+              <div className="mt-6 grid gap-3">
+                {[
+                  ["01", "Trusted context", "Knowledge sources, policies, docs, CRM and campaign data."],
+                  ["02", "System design", "Retrieval, integrations, guardrails, and workflow boundaries."],
+                  ["03", "Execution", "Salesforce, data pipelines, automations, reporting, and adoption."],
+                ].map(([step, title, text]) => (
+                  <div className="rounded-lg border bg-slate-50 p-4" key={step}>
+                    <div className="flex gap-3">
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-slate-950 text-xs font-bold text-white">
+                        {step}
+                      </span>
+                      <div>
+                        <p className="font-semibold text-slate-950">{title}</p>
+                        <p className="mt-1 text-sm leading-6 text-slate-600">{text}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 grid grid-cols-3 gap-3 border-t pt-5">
+                {[
+                  ["AI", "LLM/RAG"],
+                  ["Data", "CRM/CDP"],
+                  ["SFMC", "MarTech"],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <p className="text-xs font-semibold uppercase text-slate-500">{label}</p>
+                    <p className="mt-1 text-sm font-bold text-slate-950">{value}</p>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>

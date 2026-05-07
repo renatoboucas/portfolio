@@ -1,4 +1,4 @@
-import { openai } from "@ai-sdk/openai";
+import { createOpenAI } from "@ai-sdk/openai";
 import { streamText } from "ai";
 
 import { buildPortfolioContext, portfolioAssistantSystemPrompt } from "@/lib/ai/prompts";
@@ -8,6 +8,7 @@ export const runtime = "nodejs";
 
 const MAX_MESSAGE_LENGTH = 1000;
 const MAX_MESSAGES = 8;
+const openaiApiKey = process.env.OPENAI_API_KEY || process.env.openai_api_key;
 const UNSUPPORTED_PRIVATE_PATTERNS = [
   /\b(rate|rates|hourly|salary|compensation|pricing|price|cost)\b/i,
   /\b(available next|availability|start date|next week|this week)\b/i,
@@ -62,11 +63,11 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!openaiApiKey) {
     return Response.json(
       {
         error:
-          "OPENAI_API_KEY is not configured. Add it locally or in Vercel to enable the assistant.",
+          "OPENAI_API_KEY is not configured. Add it locally or in Vercel to enable the assistant. Environment variable names are case-sensitive.",
       },
       { status: 503 },
     );
@@ -74,6 +75,7 @@ export async function POST(request: Request) {
 
   const chunks = await retrieveKnowledge(latestUserMessage.content);
   const context = buildPortfolioContext(chunks);
+  const openai = createOpenAI({ apiKey: openaiApiKey });
 
   const result = streamText({
     model: openai("gpt-4o-mini"),

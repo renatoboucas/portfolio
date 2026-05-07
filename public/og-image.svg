@@ -1,0 +1,19 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0f172a"/>
+  <path d="M0 470C160 410 270 520 430 456C590 392 682 238 858 278C994 309 1071 414 1200 358V630H0V470Z" fill="#0e7490" fill-opacity="0.28"/>
+  <path d="M735 110H1050M735 170H1018M735 230H1085M735 290H972" stroke="#67e8f9" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="735" cy="110" r="8" fill="#67e8f9"/>
+  <circle cx="1050" cy="110" r="8" fill="#67e8f9"/>
+  <circle cx="735" cy="170" r="8" fill="#67e8f9"/>
+  <circle cx="1018" cy="170" r="8" fill="#67e8f9"/>
+  <circle cx="735" cy="230" r="8" fill="#67e8f9"/>
+  <circle cx="1085" cy="230" r="8" fill="#67e8f9"/>
+  <circle cx="735" cy="290" r="8" fill="#67e8f9"/>
+  <circle cx="972" cy="290" r="8" fill="#67e8f9"/>
+  <rect x="80" y="76" width="1040" height="478" rx="28" stroke="#334155" stroke-width="2"/>
+  <text x="112" y="166" fill="#67e8f9" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">AI + Data Engineering + Salesforce Architecture</text>
+  <text x="112" y="270" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="800">Renato Boucas</text>
+  <text x="112" y="346" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="500">Practical AI, LLM/RAG, CRM/CDP activation,</text>
+  <text x="112" y="394" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="500">data engineering, and marketing technology systems.</text>
+  <text x="112" y="495" fill="#94a3b8" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600">renato portfolio</text>
+</svg>

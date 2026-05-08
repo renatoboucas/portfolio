@@ -8,7 +8,7 @@ export function FeaturedProjects() {
     <section className="bg-white py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase text-cyan-700">Selected work</p>
+          <p className="text-sm font-semibold uppercase text-cyan-700">Projects</p>
           <h2 className="mt-3 text-3xl font-bold tracking-normal text-slate-950 sm:text-4xl">
             Case studies that show architecture in practice.
           </h2>

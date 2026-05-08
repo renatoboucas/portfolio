@@ -44,7 +44,7 @@ export function Hero() {
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg">
               <Link href="/projects">
-                View Work
+                View Projects
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>

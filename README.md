@@ -525,10 +525,12 @@ After deployment, verify:
 
 - `/`
 - `/projects`
-- `/projects/ai-portfolio-assistant-lightweight-rag`
 - `/projects/ai-marketing-operations-assistant`
 - `/projects/rag-knowledge-base-customer-support`
 - `/projects/data-engineering-crm-cdp-activation`
+- `/projects/salesforce-data-cloud-readiness-architecture`
+- `/projects/event-registration-data-integration`
+- `/projects/subscriber-profile-architecture`
 - `/projects/sfmc-migration-architecture`
 - `/projects/preference-center-consent-architecture`
 - `/projects/vbtc-campaign-analytics-automation`

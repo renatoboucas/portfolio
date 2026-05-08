@@ -23,71 +23,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "ai-portfolio-assistant-lightweight-rag",
-    title: "AI Portfolio Assistant with Lightweight RAG",
-    category: "AI Implementation",
-    summary:
-      "Built an AI assistant for this portfolio that answers questions about Renato's work, services, projects, and background using curated knowledge content and retrieval-augmented generation.",
-    longSummary:
-      "A live AI/RAG portfolio demo that uses curated public knowledge, lightweight retrieval, prompt guardrails, and a streaming chat UI to help visitors explore Renato's experience interactively.",
-    context:
-      "A static portfolio can show experience, but it does not demonstrate how Renato thinks about AI implementation or help visitors quickly explore the parts of his background most relevant to their needs.",
-    problem:
-      "Visitors may want to ask targeted questions about AI implementation, RAG, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, services, and project examples without reading every page manually.",
-    role:
-      "AI implementation architect, knowledge architecture designer, prompt guardrail planner, and Next.js implementation lead.",
-    solution:
-      "Built Renato's AI Portfolio Assistant as a dedicated /ask experience. The assistant retrieves curated Markdown knowledge about Renato's public portfolio and uses an LLM to answer questions with clear boundaries.",
-    architecture:
-      "The MVP uses a local Markdown knowledge base, keyword-based chunk retrieval, a guarded system prompt, a server-side Next.js API route, Vercel AI SDK streaming, OpenAI for response generation, and a mobile-friendly chat UI. It does not access private data or confidential client systems.",
-    deliverables: [
-      "Curated public portfolio knowledge base",
-      "Lightweight retrieval utility",
-      "Guarded AI system prompt",
-      "Server-side chat API route",
-      "Streaming chat interface",
-      "Assistant page and site-wide CTA paths",
-    ],
-    impact: [
-      "Demonstrates practical AI implementation in a live portfolio",
-      "Shows RAG-style architecture without adding unnecessary infrastructure",
-      "Helps visitors quickly find relevant information about Renato's work",
-      "Differentiates the portfolio from static resume-style sites",
-      "Creates a foundation for future vector search, citations, and lead capture",
-    ],
-    focusAreas: [
-      "LLM",
-      "RAG",
-      "Next.js",
-      "Vercel AI SDK",
-      "OpenAI",
-      "Knowledge Architecture",
-      "Prompt Design",
-      "AI Guardrails",
-    ],
-    tools: [
-      "Next.js",
-      "Vercel",
-      "Vercel AI SDK",
-      "OpenAI",
-      "TypeScript",
-      "Tailwind CSS",
-      "Markdown Knowledge Base",
-    ],
-    challenges: [
-      "Keeping the assistant grounded in public portfolio content",
-      "Avoiding impersonation or unsupported claims",
-      "Providing a useful demo without adding unnecessary infrastructure",
-    ],
-    lessonsLearned: [
-      "A small RAG demo can communicate implementation judgment when it has clear context and boundaries.",
-      "Guardrails and knowledge curation are as important as the model call in a public assistant.",
-    ],
-    visualType: "ai-workflow",
-    diagramLabel: "Lightweight RAG workflow for the portfolio assistant",
-    featured: true,
-  },
-  {
     slug: "ai-marketing-operations-assistant",
     title: "AI Marketing Operations Assistant",
     category: "AI Implementation",
@@ -247,6 +182,165 @@ export const projects: Project[] = [
     visualType: "data-pipeline",
     diagramLabel: "CRM/CDP activation data flow",
     featured: true,
+  },
+  {
+    slug: "salesforce-data-cloud-readiness-architecture",
+    title: "Salesforce Data Cloud Readiness Architecture",
+    category: "Salesforce / Data Architecture",
+    summary:
+      "Assessed customer data, identity, consent, and activation requirements to prepare Salesforce ecosystems for Data Cloud and AI-ready use cases.",
+    longSummary:
+      "A Salesforce Data Cloud readiness case study focused on customer profile modeling, source system ownership, consent-aware activation, and the practical data foundations needed before AI or personalization programs scale.",
+    context:
+      "Teams often want Data Cloud, personalization, and AI activation before the underlying customer data model, source ownership, and consent logic are clear enough to support reliable execution.",
+    problem:
+      "Without data readiness work, Data Cloud implementations can inherit duplicate profiles, unclear identity rules, missing consent signals, and activation outputs that business teams cannot confidently use.",
+    role:
+      "Salesforce data architecture advisor, CRM/CDP activation planner, and implementation readiness lead.",
+    solution:
+      "Defined a readiness approach covering source system inventory, identity resolution assumptions, customer profile attributes, consent inputs, activation destinations, and governance checkpoints before platform buildout.",
+    architecture:
+      "The architecture connects CRM, Marketing Cloud, web forms, engagement data, and warehouse/CDP sources into a governed customer profile model with explicit data ownership, activation rules, and downstream segmentation outputs.",
+    deliverables: [
+      "Data Cloud readiness assessment",
+      "Customer profile attribute map",
+      "Source system and ownership model",
+      "Consent and activation requirements",
+      "Implementation roadmap for phased rollout",
+    ],
+    impact: [
+      "Clarified what data was ready for activation and what needed cleanup first",
+      "Reduced risk of building Data Cloud on unstable identity or consent assumptions",
+      "Connected Salesforce data architecture to AI and personalization use cases",
+      "Gave technical and business teams a shared rollout path",
+    ],
+    focusAreas: ["Data Cloud", "CRM/CDP Activation", "Identity", "Consent"],
+    tools: [
+      "Salesforce Data Cloud",
+      "Salesforce CRM",
+      "Salesforce Marketing Cloud",
+      "SQL",
+      "Customer Data Models",
+      "Data Governance",
+    ],
+    challenges: [
+      "Separating platform ambition from current data readiness",
+      "Aligning data ownership across CRM, marketing, and analytics teams",
+      "Designing activation outputs that could be maintained after launch",
+    ],
+    lessonsLearned: [
+      "Data Cloud readiness is an architecture exercise before it is a configuration exercise.",
+      "AI and personalization programs depend on clear identity, consent, and source ownership.",
+    ],
+    visualType: "martech-ecosystem",
+    diagramLabel: "Data Cloud readiness and activation ecosystem",
+    featured: true,
+  },
+  {
+    slug: "event-registration-data-integration",
+    title: "Event Registration Data Integration Architecture",
+    category: "Data Engineering",
+    summary:
+      "Designed event registration data flows that connect forms, CRM records, campaign audiences, attendance signals, and reporting-ready datasets.",
+    longSummary:
+      "A data integration case study focused on turning event registration and attendance data into clean CRM, marketing automation, segmentation, and reporting workflows.",
+    context:
+      "Event programs create customer signals across registration forms, CRM contacts, campaign journeys, attendance tracking, and post-event follow-up, but those signals often remain fragmented.",
+    problem:
+      "When registration, attendance, consent, and campaign engagement are disconnected, teams lose visibility into participant behavior and struggle to automate useful follow-up.",
+    role:
+      "Integration architect, data engineering planner, and marketing automation advisor.",
+    solution:
+      "Designed a flow that normalizes event registration data, maps it to CRM and subscriber profiles, preserves consent signals, and produces audience and reporting datasets for follow-up campaigns.",
+    architecture:
+      "The approach stages form and event data, reconciles participant identity against CRM/subscriber records, applies validation and consent rules, and publishes downstream datasets for Salesforce Marketing Cloud journeys and analytics.",
+    deliverables: [
+      "Event data flow design",
+      "Registration-to-CRM mapping",
+      "Attendance and follow-up data model",
+      "Segmentation output structure",
+      "Reporting readiness checklist",
+    ],
+    impact: [
+      "Improved handoff between event operations, CRM, and marketing automation",
+      "Reduced manual spreadsheet-based audience preparation",
+      "Created cleaner reporting around registration, attendance, and follow-up",
+      "Supported more relevant post-event journeys and segmentation",
+    ],
+    focusAreas: ["Data Integration", "CRM", "SFMC Journeys", "Analytics"],
+    tools: [
+      "Salesforce CRM",
+      "Salesforce Marketing Cloud",
+      "SQL",
+      "Web Forms",
+      "Automation Studio",
+      "Dashboards",
+    ],
+    challenges: [
+      "Reconciling event participants to existing CRM and subscriber records",
+      "Preserving opt-in and suppression behavior through the integration",
+      "Keeping reporting outputs useful without over-engineering the model",
+    ],
+    lessonsLearned: [
+      "Event data is most valuable when it is modeled as a lifecycle signal, not a one-time list.",
+      "Follow-up automation improves when registration, attendance, and CRM context are connected early.",
+    ],
+    visualType: "data-pipeline",
+    diagramLabel: "Event registration data integration flow",
+    featured: false,
+  },
+  {
+    slug: "subscriber-profile-architecture",
+    title: "Subscriber Profile Architecture for Segmentation",
+    category: "Salesforce / MarTech Architecture",
+    summary:
+      "Modeled subscriber profile data across CRM, preferences, engagement, and campaign history to support maintainable segmentation and automation.",
+    longSummary:
+      "A Salesforce Marketing Cloud and CRM/CDP case study focused on subscriber profile design, governed segmentation, campaign readiness, and marketing automation maintainability.",
+    context:
+      "Subscriber data often grows through campaign-by-campaign additions, leaving teams with many disconnected Data Extensions, unclear profile ownership, and fragile segmentation logic.",
+    problem:
+      "When profile attributes, preferences, engagement data, and campaign history are not modeled consistently, segmentation becomes hard to audit and automations become difficult to maintain.",
+    role:
+      "Salesforce Marketing Cloud architect, data model designer, and campaign operations advisor.",
+    solution:
+      "Designed a profile architecture that separates core subscriber attributes, preference state, engagement signals, campaign eligibility, and reporting fields into clearer reusable data structures.",
+    architecture:
+      "The model uses governed Data Extensions, SQL transformation layers, reusable segmentation views, and documented field ownership so campaign teams can build audiences without duplicating business logic.",
+    deliverables: [
+      "Subscriber profile model",
+      "Segmentation data structure",
+      "Field ownership and governance notes",
+      "Reusable campaign eligibility patterns",
+      "Automation and QA recommendations",
+    ],
+    impact: [
+      "Made segmentation easier to inspect, reuse, and troubleshoot",
+      "Reduced duplicate logic across campaigns and journeys",
+      "Improved maintainability of Salesforce Marketing Cloud data assets",
+      "Created a cleaner foundation for Data Cloud and AI activation",
+    ],
+    focusAreas: ["Subscriber Profiles", "Segmentation", "Data Extensions", "Governance"],
+    tools: [
+      "Salesforce Marketing Cloud",
+      "SQL",
+      "Data Extensions",
+      "Automation Studio",
+      "Salesforce CRM",
+      "Data Cloud",
+    ],
+    challenges: [
+      "Balancing flexibility for campaign teams with governance and data quality",
+      "Documenting profile fields so non-technical users could understand them",
+      "Avoiding one-off segmentation logic that becomes hard to support",
+    ],
+    lessonsLearned: [
+      "Subscriber architecture should make campaign logic visible and reusable.",
+      "Clean profile design benefits segmentation, analytics, AI use cases, and compliance review.",
+    ],
+    visualType: "martech-ecosystem",
+    diagramLabel: "Subscriber profile and segmentation ecosystem",
+    featured: false,
   },
   {
     slug: "sfmc-migration-architecture",

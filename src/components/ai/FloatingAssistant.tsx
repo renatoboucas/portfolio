@@ -92,12 +92,22 @@ function getStoredAssistantHistory(): StoredAssistantHistory {
   }
 }
 
-function getInitialOpenState(storedSession: StoredAssistantSession) {
-  if (typeof storedSession.isOpen === "boolean") {
-    return storedSession.isOpen;
+function shouldOpenAssistantByDefault() {
+  if (typeof window === "undefined") {
+    return false;
   }
 
-  return false;
+  return !window.matchMedia("(max-width: 767px)").matches;
+}
+
+function ThinkingDots() {
+  return (
+    <span className="inline-flex items-center gap-1 py-1" aria-label="Assistant is thinking">
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400 [animation-delay:-0.2s]" />
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400 [animation-delay:-0.1s]" />
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" />
+    </span>
+  );
 }
 
 export function FloatingAssistant() {
@@ -107,7 +117,7 @@ export function FloatingAssistant() {
     Array.isArray(storedSession.messages) && storedSession.messages.length > 0;
   const hasStoredHistory = !hasSessionMessages && hasUserMessage(storedHistory.messages);
 
-  const [isOpen, setIsOpen] = useState(() => getInitialOpenState(storedSession));
+  const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(
     hasSessionMessages
@@ -125,6 +135,14 @@ export function FloatingAssistant() {
   const [leadName, setLeadName] = useState(storedSession.leadName ?? "");
   const [leadContext, setLeadContext] = useState(storedSession.leadContext ?? "");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setIsOpen(shouldOpenAssistantByDefault());
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     window.sessionStorage.setItem(
@@ -447,7 +465,7 @@ export function FloatingAssistant() {
                   : "border border-slate-200 bg-white text-slate-700"
               }`}
             >
-              {message.content || "Reviewing portfolio context..."}
+              {message.content || <ThinkingDots />}
             </p>
           </div>
         ))}

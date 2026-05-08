@@ -99,7 +99,7 @@ export function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
             <Button asChild className="mb-8" variant="ghost">
               <Link href="/projects">
                 <ArrowLeft className="h-4 w-4" />
-                Back to work
+                Back to projects
               </Link>
             </Button>
             <div className="grid gap-10 lg:grid-cols-[1fr_0.36fr]">

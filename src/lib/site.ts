@@ -9,7 +9,7 @@ export const siteConfig = {
   profileImage: "/images/renato-profile.jpg",
   nav: [
     { label: "Home", href: "/" },
-    { label: "Work", href: "/projects" },
+    { label: "Projects", href: "/projects" },
     { label: "Services", href: "/services" },
     { label: "Insights", href: "/insights" },
     { label: "About", href: "/about" },

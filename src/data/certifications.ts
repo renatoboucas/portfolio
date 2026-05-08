@@ -36,18 +36,21 @@ export const certifications: Certification[] = [
     issuer: "UNIDERP",
     category: "Other",
     status: "Active",
+    logo: "/images/certifications/uniderp.png",
   },
   {
     title: "Bachelor of Information Systems",
     issuer: "Centro Universitario UNA",
     category: "Other",
     status: "Active",
+    logo: "/images/certifications/una.png",
   },
   {
     title: "Multicloud & DevOps Bootcamp",
     issuer: "The Cloud Bootcamp",
     category: "Cloud",
     status: "Active",
+    logo: "/images/certifications/multicloud-bootcamp.webp",
   },
   {
     title: "Professional Scrum Master I",

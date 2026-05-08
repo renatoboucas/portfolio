@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 
 import { CTASection } from "@/components/sections/CTASection";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Services | Renato Boucas",
+  title: "Services",
   description:
     "AI implementation, LLM/RAG strategy, data engineering, Salesforce Marketing Cloud architecture, Data Cloud readiness, CRM/CDP activation, and marketing automation consulting services.",
   keywords: [
@@ -22,6 +23,25 @@ export const metadata: Metadata = {
     "CDP activation",
     "marketing automation consultant",
   ],
+  alternates: {
+    canonical: absoluteUrl("/services"),
+  },
+  openGraph: {
+    title: "Services",
+    description:
+      "AI implementation, LLM/RAG strategy, data engineering, Salesforce Marketing Cloud architecture, Data Cloud readiness, CRM/CDP activation, and marketing automation consulting services.",
+    url: absoluteUrl("/services"),
+    siteName: siteConfig.name,
+    images: [{ url: absoluteUrl(siteConfig.ogImage), width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services",
+    description:
+      "AI implementation, LLM/RAG strategy, data engineering, Salesforce Marketing Cloud architecture, Data Cloud readiness, CRM/CDP activation, and marketing automation consulting services.",
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 };
 
 export default function ServicesPage() {

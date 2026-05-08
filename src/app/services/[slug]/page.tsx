@@ -4,8 +4,11 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 import { CTASection } from "@/components/sections/CTASection";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Badge } from "@/components/ui/badge";
 import { services } from "@/data/services";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 type ServicePageProps = {
   params: Promise<{ slug: string }>;
@@ -27,13 +30,30 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 
   if (!service) {
     return {
-      title: "Service Not Found | Renato Boucas",
+      title: "Service Not Found",
     };
   }
 
   return {
-    title: `${service.title} | Renato Boucas`,
+    title: service.title,
     description: service.summary,
+    alternates: {
+      canonical: absoluteUrl(`/services/${service.slug}`),
+    },
+    openGraph: {
+      title: service.title,
+      description: service.summary,
+      url: absoluteUrl(`/services/${service.slug}`),
+      siteName: siteConfig.name,
+      images: [{ url: absoluteUrl(siteConfig.ogImage), width: 1200, height: 630 }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: service.title,
+      description: service.summary,
+      images: [absoluteUrl(siteConfig.ogImage)],
+    },
   };
 }
 
@@ -47,6 +67,16 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   return (
     <>
+      <JsonLd
+        data={[
+          serviceJsonLd(service),
+          breadcrumbJsonLd([
+            { name: "Home", href: "/" },
+            { name: "Services", href: "/services" },
+            { name: service.title, href: `/services/${service.slug}` },
+          ]),
+        ]}
+      />
       <section className="border-b bg-[linear-gradient(135deg,_#ffffff_0%,_#f8fafc_58%,_#eef6fb_100%)] py-14">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link

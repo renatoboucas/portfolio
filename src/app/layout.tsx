@@ -5,6 +5,8 @@ import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/analyti
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { personJsonLd, professionalServiceJsonLd, websiteJsonLd } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.author }],
   creator: siteConfig.author,
   alternates: {
-    canonical: siteConfig.url,
+    canonical: absoluteUrl("/"),
   },
   openGraph: {
     title: siteConfig.title,
@@ -46,7 +48,15 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -58,6 +68,7 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <GoogleTagManager />
       <body className="flex min-h-full flex-col bg-background text-foreground">
+        <JsonLd data={[personJsonLd(), websiteJsonLd(), professionalServiceJsonLd()]} />
         <GoogleTagManagerNoScript />
         <ConsentProvider>
           <Header />

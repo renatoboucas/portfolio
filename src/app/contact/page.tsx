@@ -3,9 +3,10 @@ import { FileText, Mail, Network } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { contactInfo, mailtoLink } from "@/data/contact";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact | Renato Boucas",
+  title: "Contact",
   description:
     "Contact Renato Boucas for AI implementation, LLM/RAG strategy, data engineering, Salesforce Marketing Cloud architecture, Data Cloud readiness, CRM/CDP activation, marketing automation, consulting, or professional opportunities.",
   keywords: [
@@ -20,6 +21,25 @@ export const metadata: Metadata = {
     "marketing automation consultant",
     "technical advisory",
   ],
+  alternates: {
+    canonical: absoluteUrl("/contact"),
+  },
+  openGraph: {
+    title: "Contact",
+    description:
+      "Contact Renato Boucas for AI implementation, LLM/RAG strategy, data engineering, Salesforce Marketing Cloud architecture, Data Cloud readiness, CRM/CDP activation, marketing automation, consulting, or professional opportunities.",
+    url: absoluteUrl("/contact"),
+    siteName: siteConfig.name,
+    images: [{ url: absoluteUrl(siteConfig.ogImage), width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact",
+    description:
+      "Contact Renato Boucas for AI implementation, LLM/RAG strategy, data engineering, Salesforce Marketing Cloud architecture, Data Cloud readiness, CRM/CDP activation, marketing automation, consulting, or professional opportunities.",
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 };
 
 const bestReasons = [

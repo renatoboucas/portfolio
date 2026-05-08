@@ -42,13 +42,13 @@ npm run lint
 Copy `.env.example` if needed and set the production URL:
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_SITE_URL=https://renatoboucas.com
 NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 NEXT_PUBLIC_CONSENT_DEBUG=false
 OPENAI_API_KEY=
 ```
 
-This value is used for metadata, canonical URLs, sitemap, robots, and social sharing URLs. If it is not set, the site falls back to `https://your-domain.com`.
+This value is used for metadata, canonical URLs, sitemap, robots, structured data, and social sharing URLs. If it is not set, the site falls back to `https://renatoboucas.com`.
 
 `OPENAI_API_KEY` is used only by the server-side `/api/chat` route. Do not expose it as a `NEXT_PUBLIC_` variable.
 
@@ -432,7 +432,7 @@ After the production domain is live:
 4. Submit the sitemap:
 
 ```text
-https://your-domain.com/sitemap.xml
+https://renatoboucas.com/sitemap.xml
 ```
 
 Monitor indexing, crawl issues, mobile usability, and search queries after launch.
@@ -656,6 +656,6 @@ Update assistant knowledge:
 ```text
 Renato Boucas
 AI Implementation | Data Engineering | Salesforce Architecture
-Portfolio: https://your-domain.com
+Portfolio: https://renatoboucas.com
 LinkedIn: https://www.linkedin.com/in/renato-boucas-83b7331b3/
 ```

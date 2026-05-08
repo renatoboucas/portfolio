@@ -1,10 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { absoluteUrl } from "@/lib/site";
+
 export const metadata: Metadata = {
-  title: "Cookie Policy | Renato Boucas",
+  title: "Cookie Policy",
   description:
     "Cookie policy for Renato Boucas's portfolio, including cookie categories, preference management, and analytics notes.",
+  alternates: {
+    canonical: absoluteUrl("/cookie-policy"),
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 const sections = [

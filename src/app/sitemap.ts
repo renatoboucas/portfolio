@@ -14,16 +14,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/ask",
     "/contact",
-    "/cookie-policy",
   ];
   const projectRoutes = projects.map((project) => `/projects/${project.slug}`);
   const insightRoutes = insights.map((insight) => `/insights/${insight.slug}`);
   const serviceRoutes = services.map((service) => `/services/${service.slug}`);
 
-  return [...staticRoutes, ...projectRoutes, ...serviceRoutes, ...insightRoutes].map((route) => ({
-    url: absoluteUrl(route),
-    lastModified: new Date(),
-    changeFrequency: route === "/" ? "monthly" : "monthly",
-    priority: route === "/" ? 1 : route.startsWith("/projects/") || route.startsWith("/insights/") ? 0.7 : 0.8,
-  }));
+  return [...staticRoutes, ...projectRoutes, ...serviceRoutes, ...insightRoutes].map((route) => {
+    const isDetailRoute =
+      route.startsWith("/projects/") ||
+      route.startsWith("/services/") ||
+      route.startsWith("/insights/");
+
+    return {
+      url: absoluteUrl(route),
+      lastModified: new Date(),
+      changeFrequency: route === "/" ? "weekly" : isDetailRoute ? "monthly" : "weekly",
+      priority: route === "/" ? 1 : isDetailRoute ? 0.75 : 0.9,
+    };
+  });
 }

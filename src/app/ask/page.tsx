@@ -3,11 +3,31 @@ import Link from "next/link";
 
 import { PortfolioAssistant } from "@/components/ai/PortfolioAssistant";
 import { Button } from "@/components/ui/button";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Ask AI | Renato Boucas",
+  title: "Ask AI",
   description:
     "Ask Renato's AI Portfolio Assistant about his AI implementation, LLM/RAG, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and technical architecture work.",
+  alternates: {
+    canonical: absoluteUrl("/ask"),
+  },
+  openGraph: {
+    title: "Ask AI",
+    description:
+      "Ask Renato's AI Portfolio Assistant about his AI implementation, LLM/RAG, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and technical architecture work.",
+    url: absoluteUrl("/ask"),
+    siteName: siteConfig.name,
+    images: [{ url: absoluteUrl(siteConfig.ogImage), width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ask AI",
+    description:
+      "Ask Renato's AI Portfolio Assistant about his AI implementation, LLM/RAG, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and technical architecture work.",
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 };
 
 export default function AskPage() {

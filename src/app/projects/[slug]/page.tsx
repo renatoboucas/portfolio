@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { CaseStudyLayout } from "@/components/layout/CaseStudyLayout";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getProjectBySlug, projects } from "@/data/projects";
+import { breadcrumbJsonLd, projectJsonLd } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 type ProjectPageProps = {
@@ -23,20 +25,20 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
   if (!project) {
     return {
-      title: "Project Not Found | Renato Boucas",
+      title: "Project Not Found",
     };
   }
 
   const description = project.longSummary ?? project.summary;
 
   return {
-    title: `${project.title} | Renato Boucas`,
+    title: project.title,
     description,
     alternates: {
       canonical: absoluteUrl(`/projects/${project.slug}`),
     },
     openGraph: {
-      title: `${project.title} | Renato Boucas`,
+      title: project.title,
       description,
       url: absoluteUrl(`/projects/${project.slug}`),
       siteName: siteConfig.name,
@@ -52,7 +54,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} | Renato Boucas`,
+      title: project.title,
       description,
       images: [absoluteUrl(siteConfig.ogImage)],
     },
@@ -67,5 +69,19 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  return <CaseStudyLayout project={project} />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          projectJsonLd(project),
+          breadcrumbJsonLd([
+            { name: "Home", href: "/" },
+            { name: "Projects", href: "/projects" },
+            { name: project.title, href: `/projects/${project.slug}` },
+          ]),
+        ]}
+      />
+      <CaseStudyLayout project={project} />
+    </>
+  );
 }

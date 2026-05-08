@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ArticleLayout } from "@/components/layout/ArticleLayout";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getInsightBySlug, insights } from "@/data/insights";
+import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 type InsightPageProps = {
@@ -23,18 +25,18 @@ export async function generateMetadata({ params }: InsightPageProps): Promise<Me
 
   if (!insight) {
     return {
-      title: "Insight Not Found | Renato Boucas",
+      title: "Insight Not Found",
     };
   }
 
   return {
-    title: `${insight.title} | Renato Boucas`,
+    title: insight.title,
     description: insight.description,
     alternates: {
       canonical: absoluteUrl(`/insights/${insight.slug}`),
     },
     openGraph: {
-      title: `${insight.title} | Renato Boucas`,
+      title: insight.title,
       description: insight.description,
       url: absoluteUrl(`/insights/${insight.slug}`),
       siteName: siteConfig.name,
@@ -53,7 +55,7 @@ export async function generateMetadata({ params }: InsightPageProps): Promise<Me
     },
     twitter: {
       card: "summary_large_image",
-      title: `${insight.title} | Renato Boucas`,
+      title: insight.title,
       description: insight.description,
       images: [absoluteUrl(siteConfig.ogImage)],
     },
@@ -68,5 +70,19 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
     notFound();
   }
 
-  return <ArticleLayout insight={insight} />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          articleJsonLd(insight),
+          breadcrumbJsonLd([
+            { name: "Home", href: "/" },
+            { name: "Insights", href: "/insights" },
+            { name: insight.title, href: `/insights/${insight.slug}` },
+          ]),
+        ]}
+      />
+      <ArticleLayout insight={insight} />
+    </>
+  );
 }

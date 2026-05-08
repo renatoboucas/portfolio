@@ -2,11 +2,31 @@ import type { Metadata } from "next";
 
 import { ProjectFilter } from "@/components/projects/ProjectFilter";
 import { projects } from "@/data/projects";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Projects | Renato Boucas",
+  title: "Projects",
   description:
     "Technical case studies focused on AI implementation, LLM/RAG architecture, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, marketing automation, and customer data systems.",
+  alternates: {
+    canonical: absoluteUrl("/projects"),
+  },
+  openGraph: {
+    title: "Projects",
+    description:
+      "Technical case studies focused on AI implementation, LLM/RAG architecture, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, marketing automation, and customer data systems.",
+    url: absoluteUrl("/projects"),
+    siteName: siteConfig.name,
+    images: [{ url: absoluteUrl(siteConfig.ogImage), width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects",
+    description:
+      "Technical case studies focused on AI implementation, LLM/RAG architecture, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, marketing automation, and customer data systems.",
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 };
 
 export default function ProjectsPage() {

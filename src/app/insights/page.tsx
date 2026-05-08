@@ -4,11 +4,31 @@ import { CTASection } from "@/components/sections/CTASection";
 import { InsightsGrid } from "@/components/sections/InsightsGrid";
 import { InsightCard } from "@/components/cards/InsightCard";
 import { getSortedInsights } from "@/data/insights";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Insights | Renato Boucas",
+  title: "Insights",
   description:
     "Practical articles on AI implementation, LLM/RAG architecture, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and marketing automation.",
+  alternates: {
+    canonical: absoluteUrl("/insights"),
+  },
+  openGraph: {
+    title: "Insights",
+    description:
+      "Practical articles on AI implementation, LLM/RAG architecture, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and marketing automation.",
+    url: absoluteUrl("/insights"),
+    siteName: siteConfig.name,
+    images: [{ url: absoluteUrl(siteConfig.ogImage), width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Insights",
+    description:
+      "Practical articles on AI implementation, LLM/RAG architecture, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and marketing automation.",
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 };
 
 export default function InsightsPage() {

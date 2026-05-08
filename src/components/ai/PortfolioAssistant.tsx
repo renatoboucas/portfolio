@@ -9,7 +9,6 @@ import { ChatInput } from "@/components/ai/ChatInput";
 import { ChatMessages, type ChatMessage } from "@/components/ai/ChatMessages";
 import { SuggestedQuestions } from "@/components/ai/SuggestedQuestions";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 function createMessage(role: ChatMessage["role"], content: string): ChatMessage {
   return {
@@ -103,22 +102,22 @@ export function PortfolioAssistant() {
   }
 
   return (
-    <Card className="overflow-hidden border-slate-200 shadow-xl">
-      <CardHeader className="border-b bg-white">
+    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl">
+      <div className="border-b bg-white p-5 sm:p-6">
         <div className="flex items-start gap-4">
           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-slate-950 text-white">
             <Bot className="h-6 w-6" />
           </span>
           <div>
-            <CardTitle className="text-2xl">Renato&apos;s AI Portfolio Assistant</CardTitle>
+            <h2 className="text-2xl font-semibold text-slate-950">Renato&apos;s AI Portfolio Assistant</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              Ask about Renato&apos;s public portfolio content: projects, services, AI/RAG work,
+              Ask focused questions about Renato&apos;s public work, services, AI/RAG experience,
               Salesforce architecture, data engineering, and consulting focus.
             </p>
           </div>
         </div>
-      </CardHeader>
-      <CardContent className="grid gap-6 p-5 sm:p-6">
+      </div>
+      <div className="grid gap-6 p-5 sm:p-6">
         <AssistantDisclaimer />
         <SuggestedQuestions disabled={isLoading} onSelect={sendQuestion} />
         <ChatMessages messages={messages} />
@@ -139,8 +138,7 @@ export function PortfolioAssistant() {
             </Link>
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </section>
   );
 }
-

@@ -3,14 +3,11 @@
 import { Button } from "@/components/ui/button";
 
 export const suggestedQuestions = [
-  "What kind of AI implementation work does Renato do?",
+  "Summarize Renato's fit for an AI architect role.",
   "How does Renato approach RAG projects?",
-  "How does Renato combine Salesforce and AI?",
-  "What Salesforce Marketing Cloud experience does Renato have?",
-  "Can Renato help with Data Cloud and CRM/CDP activation?",
-  "What data engineering tools does Renato work with?",
-  "What projects best show Renato's architecture experience?",
-  "How can I contact Renato?",
+  "What Salesforce and Data Cloud experience does Renato have?",
+  "Which projects best show architecture depth?",
+  "How can I contact Renato or request a resume?",
 ];
 
 export function SuggestedQuestions({
@@ -22,11 +19,11 @@ export function SuggestedQuestions({
 }) {
   return (
     <div>
-      <p className="mb-3 text-sm font-semibold text-slate-700">Suggested questions</p>
+      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Suggested prompts</p>
       <div className="flex flex-wrap gap-2">
         {suggestedQuestions.map((question) => (
           <Button
-            className="h-auto rounded-full px-3 py-2 text-left text-xs"
+            className="h-auto rounded-full border-slate-200 bg-slate-50 px-3 py-2 text-left text-xs text-slate-700 hover:bg-white"
             disabled={disabled}
             key={question}
             onClick={() => onSelect(question)}
@@ -40,4 +37,3 @@ export function SuggestedQuestions({
     </div>
   );
 }
-

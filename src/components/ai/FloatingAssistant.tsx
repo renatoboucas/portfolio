@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Bot, MessageCircle, Minus, Send, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Bot, MessageCircle, Minus, Send, ShieldCheck, Sparkles, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { contactInfo, mailtoLink } from "@/data/contact";
@@ -16,16 +16,16 @@ type LeadIntent = "contact" | "resume" | null;
 type LeadStep = "name" | "context" | null;
 
 const starterQuestions = [
-  "What AI implementation work does Renato do?",
-  "How does Renato approach RAG?",
-  "Can Renato help with Data Cloud?",
+  "Summarize Renato's fit",
+  "What AI/RAG work does he do?",
+  "Can he help with Data Cloud?",
 ];
 
 const contactIntentPattern = /\b(contact|email|reach out|connect|talk|speak|hire|consulting|consultation)\b/i;
 const resumeIntentPattern = /\b(resume|cv|curriculum|background summary)\b/i;
 const STORAGE_KEY = "renato-floating-assistant";
 const initialAssistantMessage =
-  "Hi, I am Renato's AI Portfolio Assistant. Ask about Renato's projects, services, AI/RAG work, Salesforce experience, or data engineering background.";
+  "This is Renato's AI Portfolio Assistant. Ask about his work, services, AI/RAG experience, Salesforce architecture, or data engineering background.";
 
 type StoredAssistantSession = {
   isOpen?: boolean;
@@ -79,6 +79,7 @@ export function FloatingAssistant() {
   const [leadStep, setLeadStep] = useState<LeadStep>(storedSession.leadStep ?? null);
   const [leadName, setLeadName] = useState(storedSession.leadName ?? "");
   const [leadContext, setLeadContext] = useState(storedSession.leadContext ?? "");
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     window.sessionStorage.setItem(
@@ -93,6 +94,10 @@ export function FloatingAssistant() {
       }),
     );
   }, [isOpen, messages, leadIntent, leadStep, leadName, leadContext]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages, isOpen]);
 
   useEffect(() => {
     function openAssistantFromLink(event?: Event) {
@@ -138,8 +143,8 @@ export function FloatingAssistant() {
       createMessage(
         "assistant",
         intent === "resume"
-          ? "I can help you request Renato's resume. What is your name?"
-          : "I can help you start an email to Renato. What is your name?",
+          ? "I can help prepare a resume request. What name should Renato see in the email?"
+          : "I can help prepare a focused email to Renato. What name should Renato see in the message?",
       ),
     ]);
   }
@@ -169,8 +174,8 @@ export function FloatingAssistant() {
         createMessage(
           "assistant",
           leadIntent === "resume"
-            ? `Thanks, ${trimmed}. What should Renato know before sending the resume?`
-            : `Thanks, ${trimmed}. What should Renato know before he replies?`,
+            ? `Thanks, ${trimmed}. What should Renato know about the resume request?`
+            : `Thanks, ${trimmed}. What context should Renato know before replying?`,
         ),
       ]);
       return true;
@@ -273,7 +278,7 @@ export function FloatingAssistant() {
             ? {
                 ...chatMessage,
                 content:
-                  "I could not complete that response. You can still email Renato directly or request a resume below.",
+                  "I could not complete that response. You can still ask again, request a resume, or email Renato directly.",
               }
             : chatMessage,
         ),
@@ -287,12 +292,13 @@ export function FloatingAssistant() {
     return (
       <div className="fixed bottom-5 right-5 z-50">
         <Button
-          className="h-14 rounded-full px-5 shadow-xl"
+          className="h-12 rounded-full border border-slate-200 bg-white px-4 text-slate-950 shadow-xl hover:bg-slate-50"
           onClick={() => setIsOpen(true)}
           type="button"
+          variant="outline"
         >
-          <MessageCircle className="h-5 w-5" />
-          Ask AI
+          <MessageCircle className="h-4 w-4" />
+          Ask AI Assistant
         </Button>
       </div>
     );
@@ -301,54 +307,67 @@ export function FloatingAssistant() {
   return (
     <aside
       aria-label="Renato's AI Portfolio Assistant"
-      className="fixed bottom-4 right-4 z-50 w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl sm:bottom-6 sm:right-6"
+      className="fixed bottom-4 right-4 z-50 w-[calc(100vw-2rem)] max-w-[420px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl sm:bottom-6 sm:right-6"
     >
-      <div className="flex items-center justify-between border-b px-4 py-3">
+      <div className="flex items-start justify-between border-b bg-white px-4 py-4">
         <div className="flex items-center gap-3">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-slate-950 text-white">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-slate-950 text-white">
             <Bot className="h-4 w-4" />
           </span>
           <div>
-            <p className="text-sm font-semibold text-slate-950">AI Portfolio Assistant</p>
-            <p className="text-xs text-slate-500">
-              {leadIntent ? "Contact flow" : "Public portfolio answers"}
+            <p className="text-sm font-semibold text-slate-950">Renato&apos;s AI Portfolio Assistant</p>
+            <p className="mt-0.5 text-xs text-slate-500">
+              {leadIntent ? "Preparing a focused email" : "Grounded in public portfolio content"}
             </p>
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <Button aria-label="Minimize assistant" onClick={() => setIsOpen(false)} size="icon" variant="ghost">
+          <Button aria-label="Minimize assistant" className="h-8 w-8" onClick={() => setIsOpen(false)} size="icon" variant="ghost">
             <Minus className="h-4 w-4" />
           </Button>
-          <Button aria-label="Close assistant" onClick={() => setIsOpen(false)} size="icon" variant="ghost">
+          <Button aria-label="Close assistant" className="h-8 w-8" onClick={() => setIsOpen(false)} size="icon" variant="ghost">
             <X className="h-4 w-4" />
           </Button>
         </div>
       </div>
 
-      <div className="max-h-[52vh] space-y-3 overflow-y-auto bg-slate-50 px-4 py-4">
+      <div className="border-b bg-slate-50 px-4 py-3">
+        <div className="flex items-start gap-2 text-xs leading-5 text-slate-600">
+          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-700" />
+          <p>Answers from curated portfolio knowledge. For private details, it will recommend contacting Renato.</p>
+        </div>
+      </div>
+
+      <div className="max-h-[50vh] space-y-3 overflow-y-auto bg-slate-50 px-4 py-4">
         {messages.map((message) => (
           <div
             className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
             key={message.id}
           >
             <p
-              className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm leading-6 ${
+              className={`max-w-[86%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-6 shadow-sm ${
                 message.role === "user"
                   ? "bg-slate-950 text-white"
-                  : "border bg-white text-slate-700"
+                  : "border border-slate-200 bg-white text-slate-700"
               }`}
             >
-              {message.content || "Thinking..."}
+              {message.content || "Reviewing portfolio context..."}
             </p>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
       <div className="space-y-3 border-t bg-white p-4">
-        <div className="flex flex-wrap gap-2">
+        <div>
+          <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+            <Sparkles className="h-3.5 w-3.5" />
+            Suggested prompts
+          </div>
+          <div className="flex flex-wrap gap-2">
           {starterQuestions.map((question) => (
             <button
-              className="rounded-full border px-3 py-1.5 text-xs font-medium text-slate-600 hover:border-slate-400 hover:text-slate-950"
+              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:border-slate-400 hover:bg-white hover:text-slate-950"
               disabled={isLoading}
               key={question}
               onClick={() => sendQuestion(question)}
@@ -357,6 +376,7 @@ export function FloatingAssistant() {
               {question}
             </button>
           ))}
+          </div>
         </div>
 
         {error && <p className="text-xs leading-5 text-red-600">{error}</p>}
@@ -372,14 +392,14 @@ export function FloatingAssistant() {
             Ask Renato&apos;s AI Portfolio Assistant
           </label>
           <input
-            className="min-w-0 flex-1 rounded-full border px-4 py-2 text-sm outline-none focus:border-slate-500"
+            className="min-w-0 flex-1 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-slate-500"
             id="floating-assistant-input"
             maxLength={1000}
             onChange={(event) => setInput(event.target.value)}
             placeholder="Ask about Renato's work..."
             value={input}
           />
-          <Button disabled={isLoading || input.trim().length === 0} size="icon" type="submit">
+          <Button className="h-10 w-10 rounded-full" disabled={isLoading || input.trim().length === 0} size="icon" type="submit">
             <Send className="h-4 w-4" />
           </Button>
         </form>

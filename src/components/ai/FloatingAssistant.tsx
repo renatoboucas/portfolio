@@ -23,7 +23,8 @@ const starterQuestions = [
 
 const contactIntentPattern = /\b(contact|email|reach out|connect|talk|speak|hire|consulting|consultation)\b/i;
 const resumeIntentPattern = /\b(resume|cv|curriculum|background summary)\b/i;
-const STORAGE_KEY = "renato-floating-assistant";
+const SESSION_STORAGE_KEY = "renato-floating-assistant-session";
+const HISTORY_STORAGE_KEY = "renato-floating-assistant-history";
 const initialAssistantMessage =
   "This is Renato's AI Portfolio Assistant. Ask about his work, services, AI/RAG experience, Salesforce architecture, or data engineering background.";
 
@@ -35,6 +36,15 @@ type StoredAssistantSession = {
   leadName?: string;
   leadContext?: string;
 };
+
+type StoredAssistantHistory = {
+  messages?: ChatMessage[];
+  updatedAt?: string;
+};
+
+function hasUserMessage(messages?: ChatMessage[]) {
+  return Array.isArray(messages) && messages.some((message) => message.role === "user");
+}
 
 function createMessage(role: ChatMessage["role"], content: string): ChatMessage {
   return {
@@ -49,7 +59,7 @@ function getStoredAssistantSession(): StoredAssistantSession {
     return {};
   }
 
-  const stored = window.sessionStorage.getItem(STORAGE_KEY);
+  const stored = window.sessionStorage.getItem(SESSION_STORAGE_KEY);
 
   if (!stored) {
     return {};
@@ -58,7 +68,26 @@ function getStoredAssistantSession(): StoredAssistantSession {
   try {
     return JSON.parse(stored) as StoredAssistantSession;
   } catch {
-    window.sessionStorage.removeItem(STORAGE_KEY);
+    window.sessionStorage.removeItem(SESSION_STORAGE_KEY);
+    return {};
+  }
+}
+
+function getStoredAssistantHistory(): StoredAssistantHistory {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
+  const stored = window.localStorage.getItem(HISTORY_STORAGE_KEY);
+
+  if (!stored) {
+    return {};
+  }
+
+  try {
+    return JSON.parse(stored) as StoredAssistantHistory;
+  } catch {
+    window.localStorage.removeItem(HISTORY_STORAGE_KEY);
     return {};
   }
 }
@@ -73,14 +102,22 @@ function getInitialOpenState(storedSession: StoredAssistantSession) {
 
 export function FloatingAssistant() {
   const storedSession = getStoredAssistantSession();
+  const storedHistory = getStoredAssistantHistory();
+  const hasSessionMessages =
+    Array.isArray(storedSession.messages) && storedSession.messages.length > 0;
+  const hasStoredHistory = !hasSessionMessages && hasUserMessage(storedHistory.messages);
 
   const [isOpen, setIsOpen] = useState(() => getInitialOpenState(storedSession));
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(
-    Array.isArray(storedSession.messages) && storedSession.messages.length > 0
-      ? storedSession.messages
+    hasSessionMessages
+      ? (storedSession.messages ?? [])
       : [createMessage("assistant", initialAssistantMessage)],
   );
+  const [previousMessages, setPreviousMessages] = useState<ChatMessage[]>(
+    hasStoredHistory ? storedHistory.messages ?? [] : [],
+  );
+  const [showContinuePrompt, setShowContinuePrompt] = useState(hasStoredHistory);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [leadIntent, setLeadIntent] = useState<LeadIntent>(storedSession.leadIntent ?? null);
@@ -91,7 +128,7 @@ export function FloatingAssistant() {
 
   useEffect(() => {
     window.sessionStorage.setItem(
-      STORAGE_KEY,
+      SESSION_STORAGE_KEY,
       JSON.stringify({
         isOpen,
         messages,
@@ -102,6 +139,18 @@ export function FloatingAssistant() {
       }),
     );
   }, [isOpen, messages, leadIntent, leadStep, leadName, leadContext]);
+
+  useEffect(() => {
+    if (hasUserMessage(messages)) {
+      window.localStorage.setItem(
+        HISTORY_STORAGE_KEY,
+        JSON.stringify({
+          messages,
+          updatedAt: new Date().toISOString(),
+        }),
+      );
+    }
+  }, [messages]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -155,6 +204,25 @@ export function FloatingAssistant() {
           : "I can help prepare a focused email to Renato. What name should Renato see in the message?",
       ),
     ]);
+  }
+
+  function continuePreviousConversation() {
+    setMessages(previousMessages);
+    setShowContinuePrompt(false);
+  }
+
+  function startNewConversation() {
+    setMessages([createMessage("assistant", initialAssistantMessage)]);
+    setPreviousMessages([]);
+    setShowContinuePrompt(false);
+    setLeadIntent(null);
+    setLeadStep(null);
+    setLeadName("");
+    setLeadContext("");
+
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(HISTORY_STORAGE_KEY);
+    }
   }
 
   function openEmailDraft(intent: Exclude<LeadIntent, null>, name: string, context: string) {
@@ -344,6 +412,26 @@ export function FloatingAssistant() {
           <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-700" />
           <p>Answers from curated portfolio knowledge. For private details, it will recommend contacting Renato.</p>
         </div>
+        {showContinuePrompt && (
+          <div className="mt-3 rounded-xl border border-slate-200 bg-white p-3">
+            <p className="text-xs leading-5 text-slate-600">
+              Welcome back. Would you like to continue your previous conversation?
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Button className="h-8 px-3 text-xs" onClick={continuePreviousConversation} type="button">
+                Continue
+              </Button>
+              <Button
+                className="h-8 px-3 text-xs"
+                onClick={startNewConversation}
+                type="button"
+                variant="outline"
+              >
+                Start New
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="max-h-[50vh] space-y-3 overflow-y-auto bg-slate-50 px-4 py-4">

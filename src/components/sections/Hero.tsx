@@ -21,8 +21,7 @@ export function Hero() {
     <section className="border-b bg-[linear-gradient(135deg,_#ffffff_0%,_#f8fafc_58%,_#edf8fb_100%)]">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="max-w-5xl">
-          <p className="text-base font-semibold text-slate-950">Renato Boucas</p>
-          <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-cyan-700">
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">
             AI Architect | Data Engineering | Salesforce & CRM/CDP Architecture
           </p>
           <h1 className="mt-6 text-4xl font-bold tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">

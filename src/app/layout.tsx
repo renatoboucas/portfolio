@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: absoluteUrl(siteConfig.ogImage),
         width: 1200,
         height: 630,
-          alt: "Renato Boucas - AI Architect, Data Engineering, and Salesforce Architecture",
+        alt: "Renato Boucas - AI Architect, Data Engineering, and Salesforce Architecture",
       },
     ],
     locale: "en_US",
@@ -56,8 +56,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
+      <GoogleTagManager />
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <GoogleTagManager />
         <GoogleTagManagerNoScript />
         <ConsentProvider>
           <Header />

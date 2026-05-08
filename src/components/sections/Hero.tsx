@@ -57,19 +57,19 @@ export function Hero() {
         <div className="mt-12 border-t pt-6 text-sm text-slate-600">
           <p>16+ years across IT, data, cloud, marketing technology, and platform architecture.</p>
           {heroCertifications.length > 0 && (
-            <div className="mt-5 flex items-center gap-3 overflow-x-auto pb-2">
+            <div className="mt-6 flex items-center gap-4 overflow-x-auto pb-2">
               {heroCertifications.map((certification) => (
                 <div
-                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white/90 p-2 shadow-sm"
+                  className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-sm"
                   key={certification.title}
                   title={certification.title}
                 >
                   <Image
                     alt={certification.logoAlt ?? certification.title}
                     className="h-full w-full object-contain"
-                    height={56}
+                    height={84}
                     src={certification.logo as string}
-                    width={56}
+                    width={84}
                   />
                 </div>
               ))}

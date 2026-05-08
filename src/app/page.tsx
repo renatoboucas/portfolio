@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { AIAssistantSection } from "@/components/sections/AIAssistantSection";
-import { CertificationsStrip } from "@/components/sections/CertificationsStrip";
 import { CoreExpertise } from "@/components/sections/CoreExpertise";
 import { CTASection } from "@/components/sections/CTASection";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
@@ -33,7 +32,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <CertificationsStrip />
       <FeaturedProjects />
       <CoreExpertise />
       <AIAssistantSection />

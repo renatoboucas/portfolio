@@ -43,12 +43,18 @@ Copy `.env.example` if needed and set the production URL:
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+NEXT_PUBLIC_CONSENT_DEBUG=false
 OPENAI_API_KEY=
 ```
 
 This value is used for metadata, canonical URLs, sitemap, robots, and social sharing URLs. If it is not set, the site falls back to `https://your-domain.com`.
 
 `OPENAI_API_KEY` is used only by the server-side `/api/chat` route. Do not expose it as a `NEXT_PUBLIC_` variable.
+
+`NEXT_PUBLIC_GTM_ID` is optional. If it is empty, the Google Tag Manager script is not rendered. If it is set, the site initializes Google Consent Mode defaults before GTM loads.
+
+`NEXT_PUBLIC_CONSENT_DEBUG` is reserved for consent debugging and should remain `false` in production unless intentionally testing.
 
 ## AI Portfolio Assistant
 
@@ -285,6 +291,99 @@ After deployment:
 4. Confirm page views appear in the Vercel dashboard.
 
 Optional future tools include GA4, Plausible, PostHog, or LinkedIn Insight Tag. If form tracking or additional analytics are added, create a simple privacy page before broad promotion.
+
+## Cookie Consent and GTM Foundation
+
+The site includes a cookie consent banner and privacy preferences drawer. This is a technical foundation for future Google Tag Manager and GA4 work, not legal advice. Cookie and privacy copy should be reviewed before broad use.
+
+Consent files:
+
+```text
+src/lib/consent/config.ts
+src/lib/consent/consentUtils.ts
+src/lib/consent/googleConsent.ts
+src/components/consent/
+src/components/analytics/GoogleTagManager.tsx
+```
+
+Consent categories:
+
+- Strictly Necessary Cookies: always active.
+- Performance Cookies: optional analytics and performance measurement.
+- Functional Cookies: optional functionality and personalization.
+- Targeting / Advertising Cookies: optional advertising, retargeting, and personalized measurement.
+
+Consent is stored in browser local storage under:
+
+```text
+renato_cookie_consent_v1
+```
+
+Google Consent Mode mapping:
+
+- Performance Cookies: `analytics_storage`
+- Functional Cookies: `functionality_storage`, `personalization_storage`
+- Targeting / Advertising Cookies: `ad_storage`, `ad_user_data`, `ad_personalization`
+- Security storage remains `granted`
+
+Default consent before user choice:
+
+```text
+ad_storage: denied
+analytics_storage: denied
+ad_user_data: denied
+ad_personalization: denied
+functionality_storage: denied
+personalization_storage: denied
+security_storage: granted
+```
+
+The consent system pushes dataLayer events for later GTM configuration:
+
+- `consent_banner_view`
+- `consent_accept_all`
+- `consent_reject_optional`
+- `consent_confirm_choices`
+- `consent_preferences_open`
+- `consent_preferences_close`
+- `consent_update`
+
+It also dispatches a browser event:
+
+```text
+renatoConsentUpdated
+```
+
+### Testing Consent Locally
+
+1. Run `npm run dev`.
+2. Open the site in a browser.
+3. Confirm the cookie banner appears on first visit.
+4. Test Accept Cookies, Your Privacy Rights, category toggles, and Confirm My Choices.
+5. Confirm `renato_cookie_consent_v1` appears in local storage.
+
+To reset consent:
+
+1. Open browser developer tools.
+2. Go to Application > Local Storage.
+3. Delete `renato_cookie_consent_v1`.
+4. Refresh the page.
+
+### Future GTM, GA4, and Consent Mode Sprint
+
+Future scope:
+
+- Create GTM container.
+- Add GA4 configuration tag.
+- Configure Consent Initialization.
+- Configure Google Consent Mode 2.0 settings.
+- Map consent categories to GTM consent types.
+- Add GA4 page view strategy.
+- Add custom events such as `ask_ai_click`, `chat_message_submit`, `contact_click`, `resume_download`, `project_view`, `insight_view`, `service_click`, and `certification_click`.
+- Configure tag firing rules based on consent.
+- Validate with Google Tag Assistant.
+- Verify consent states for `ad_storage`, `analytics_storage`, `ad_user_data`, and `ad_personalization`.
+- Validate in GA4 DebugView.
 
 ## Vercel Deployment
 

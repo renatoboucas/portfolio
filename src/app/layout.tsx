@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { FloatingAssistant } from "@/components/ai/FloatingAssistant";
+import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/analytics/GoogleTagManager";
+import { ConsentProvider } from "@/components/consent/ConsentProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { absoluteUrl, siteConfig } from "@/lib/site";
@@ -55,11 +57,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <FloatingAssistant />
-        <Analytics />
+        <GoogleTagManager />
+        <GoogleTagManagerNoScript />
+        <ConsentProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <FloatingAssistant />
+          <Analytics />
+        </ConsentProvider>
       </body>
     </html>
   );

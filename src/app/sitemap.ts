@@ -6,7 +6,16 @@ import { services } from "@/data/services";
 import { absoluteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["/", "/projects", "/services", "/insights", "/about", "/ask", "/contact"];
+  const staticRoutes = [
+    "/",
+    "/projects",
+    "/services",
+    "/insights",
+    "/about",
+    "/ask",
+    "/contact",
+    "/cookie-policy",
+  ];
   const projectRoutes = projects.map((project) => `/projects/${project.slug}`);
   const insightRoutes = insights.map((insight) => `/insights/${insight.slug}`);
   const serviceRoutes = services.map((service) => `/services/${service.slug}`);

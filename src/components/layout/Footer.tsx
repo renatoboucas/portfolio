@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { ManageCookiesButton } from "@/components/consent/ManageCookiesButton";
 import { Separator } from "@/components/ui/separator";
 import { contactInfo } from "@/data/contact";
 import { navLinks } from "@/data/navigation";
@@ -46,7 +47,12 @@ export function Footer() {
         <Separator className="my-8 bg-slate-200" />
         <div className="flex flex-col gap-2 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-          <p>Built for practical AI, data, and customer systems.</p>
+          <div className="flex flex-wrap gap-3">
+            <Link className="text-slate-600 hover:text-slate-950" href="/cookie-policy">
+              Cookie Policy
+            </Link>
+            <ManageCookiesButton />
+          </div>
         </div>
       </div>
     </footer>

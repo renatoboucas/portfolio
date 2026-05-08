@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { certifications } from "@/data/certifications";
 
 const focusAreas = [
   "LLM/RAG Architecture",
@@ -11,6 +13,8 @@ const focusAreas = [
   "Data Engineering",
   "Marketing Automation",
 ];
+
+const heroCertifications = certifications.filter((certification) => certification.logo).slice(0, 8);
 
 export function Hero() {
   return (
@@ -52,6 +56,25 @@ export function Hero() {
         </div>
         <div className="mt-12 border-t pt-6 text-sm text-slate-600">
           <p>16+ years across IT, data, cloud, marketing technology, and platform architecture.</p>
+          {heroCertifications.length > 0 && (
+            <div className="mt-5 flex items-center gap-3 overflow-x-auto pb-2">
+              {heroCertifications.map((certification) => (
+                <div
+                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white/90 p-2 shadow-sm"
+                  key={certification.title}
+                  title={certification.title}
+                >
+                  <Image
+                    alt={certification.logoAlt ?? certification.title}
+                    className="h-full w-full object-contain"
+                    height={56}
+                    src={certification.logo as string}
+                    width={56}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

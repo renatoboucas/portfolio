@@ -63,10 +63,18 @@ function getStoredAssistantSession(): StoredAssistantSession {
   }
 }
 
+function getInitialOpenState(storedSession: StoredAssistantSession) {
+  if (typeof storedSession.isOpen === "boolean") {
+    return storedSession.isOpen;
+  }
+
+  return false;
+}
+
 export function FloatingAssistant() {
   const storedSession = getStoredAssistantSession();
 
-  const [isOpen, setIsOpen] = useState(storedSession.isOpen ?? true);
+  const [isOpen, setIsOpen] = useState(() => getInitialOpenState(storedSession));
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(
     Array.isArray(storedSession.messages) && storedSession.messages.length > 0

@@ -7,7 +7,7 @@ export const siteConfig = {
   author: "Renato Boucas",
   email: "renatoboucas@gmail.com",
   ogImage: "/og-image.png",
-  profileImage: "/images/renato-profile.jpg",
+  profileImage: "/images/renato-profile.png",
   sameAs: ["https://www.linkedin.com/in/renato-boucas-83b7331b3/"],
   professionalTitle: "AI Architect | Data Engineering | Salesforce & CRM/CDP Architecture",
   nav: [

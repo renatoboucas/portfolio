@@ -28,7 +28,12 @@ Good-fit work includes architecture reviews, implementation planning, hands-on t
 
 Renato's public portfolio references OpenAI, Anthropic Claude, Google Gemini, Salesforce Marketing Cloud, Salesforce Data Cloud, Salesforce CRM, SQL, BigQuery, Snowflake, AWS S3, Hightouch, Celigo, AMPscript, SSJS, CloudPages, Automation Studio, Journey Builder, GitHub, Vercel, AWS, GCP, Azure, Terraform, and Ansible.
 
+## What companies has Renato worked with?
+
+The public portfolio context available to this assistant includes limited company information. Renato's public LinkedIn profile lists Cru in his professional experience. Public business records also connect Renato to Benrer Solutions Corp in a president/business ownership role. The portfolio includes a campaign analytics and automation case study connected to Victory Beyond the Cup.
+
+This is not a complete chronological employment history. For exact employers, dates, titles, private client work, or resume-level background, visitors should review Renato's LinkedIn profile or contact him directly.
+
 ## How can I contact Renato?
 
 Renato can be contacted by email at renatoboucas@gmail.com or through LinkedIn at https://www.linkedin.com/in/renato-boucas-83b7331b3/.
-

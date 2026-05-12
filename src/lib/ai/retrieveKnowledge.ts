@@ -38,6 +38,14 @@ const STOP_WORDS = new Set([
   "work",
 ]);
 
+const QUERY_EXPANSIONS: Record<string, string[]> = {
+  companies: ["company", "employer", "employers", "professional", "history"],
+  company: ["companies", "employer", "employers", "professional", "history"],
+  employer: ["company", "companies", "worked", "professional", "history"],
+  employers: ["company", "companies", "worked", "professional", "history"],
+  worked: ["companies", "company", "employer", "employers", "professional", "history"],
+};
+
 function tokenize(text: string) {
   return text
     .toLowerCase()
@@ -115,7 +123,9 @@ function scoreChunk(queryTerms: string[], chunk: KnowledgeChunk) {
 }
 
 export async function retrieveKnowledge(query: string, limit = 5): Promise<KnowledgeChunk[]> {
-  const queryTerms = Array.from(new Set(tokenize(query)));
+  const baseTerms = tokenize(query);
+  const expandedTerms = baseTerms.flatMap((term) => [term, ...(QUERY_EXPANSIONS[term] ?? [])]);
+  const queryTerms = Array.from(new Set(expandedTerms));
 
   if (queryTerms.length === 0) {
     return [];
@@ -132,4 +142,3 @@ export async function retrieveKnowledge(query: string, limit = 5): Promise<Knowl
     .sort((a, b) => b.score - a.score)
     .slice(0, limit);
 }
-

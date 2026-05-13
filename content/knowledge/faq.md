@@ -26,11 +26,21 @@ Good-fit work includes architecture reviews, implementation planning, hands-on t
 
 ## What tools does Renato work with?
 
-Renato's public portfolio references OpenAI, Anthropic Claude, Google Gemini, Salesforce Marketing Cloud, Salesforce Data Cloud, Salesforce CRM, SQL, BigQuery, Snowflake, AWS S3, Hightouch, Celigo, AMPscript, SSJS, CloudPages, Automation Studio, Journey Builder, GitHub, Vercel, AWS, GCP, Azure, Terraform, and Ansible.
+Renato's public portfolio and LinkedIn profile reference OpenAI, Anthropic Claude, Google Gemini, Salesforce Marketing Cloud, Salesforce Data Cloud, Salesforce CRM, SQL, Python, JavaScript, TypeScript, Node.js, React, Next.js, BigQuery, Snowflake, AWS S3, Hightouch, Celigo, AMPscript, SSJS, CloudPages, Automation Studio, Journey Builder, GA4, GTM, AWS, GCP, Azure, Oracle Cloud, Docker, Kubernetes, Terraform, Ansible, GitHub Actions, CI/CD, APIs, ETL, AI agents, LLMs, RAG, vector databases, semantic search, and prompt engineering.
 
 ## What companies has Renato worked with?
 
-The assistant does not list Renato's company history from inferred public records or incomplete context. For Renato's current public work history, exact employers, dates, and titles, visitors should review his LinkedIn profile:
+Based on approved LinkedIn profile content provided for the portfolio assistant, Renato's public work history includes Cru, NRB Solutions and Services, Centro Universitario Presidente Antonio Carlos - UNIPAC, and Dreosoft.
+
+At Cru, Renato has worked as Data Analyst Manager / Solutions Architect and Senior Data Analyst, focused on enterprise data engineering, marketing technology, Salesforce Marketing Cloud, analytics, AI-driven engagement, and customer data platforms.
+
+At NRB Solutions and Services, Renato worked as Principal AI / Solutions Architect and Senior Integration Engineer, focused on enterprise software, cloud, ETL, automation, CRM, Salesforce, AI, and integration architecture.
+
+At Centro Universitario Presidente Antonio Carlos - UNIPAC, Renato worked as IT Infrastructure Manager / Solution Architect, focused on infrastructure, systems integration, network architecture, virtualization, business continuity, and enterprise IT operations.
+
+At Dreosoft, Renato worked as a Business Analyst, focused on educational technology, mobile applications, requirements engineering, business analysis, and digital learning platforms.
+
+For exact dates, full role descriptions, and profile verification, visitors can review Renato's LinkedIn profile:
 
 https://www.linkedin.com/in/renatoboucas
 

@@ -22,7 +22,7 @@ export function Hero() {
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="max-w-5xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">
-            AI Architect | Data Engineering | Salesforce & CRM/CDP Architecture
+            AI & Salesforce Architect | Data Engineering Manager | 3x Salesforce Certified
           </p>
           <h1 className="mt-6 text-4xl font-bold tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
             AI Architect for data, Salesforce, and practical business automation.
@@ -54,7 +54,7 @@ export function Hero() {
           </div>
         </div>
         <div className="mt-12 border-t pt-6 text-sm text-slate-600">
-          <p>16+ years across IT, data, cloud, marketing technology, and platform architecture.</p>
+          <p>18+ years across software engineering, data, cloud, DevOps, AI, and Salesforce architecture.</p>
           {heroCertifications.length > 0 && (
             <div className="mt-6 flex items-center gap-4 overflow-x-auto pb-2">
               {heroCertifications.map((certification) => (

@@ -1,15 +1,15 @@
 export const siteConfig = {
   name: "Renato Boucas",
-  title: "Renato Boucas | AI Architect, Data Engineering & Salesforce Architecture",
+  title: "Renato Boucas | AI & Salesforce Architect, Data Engineering Manager",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://renatoboucas.com",
   description:
-    "Portfolio of Renato Boucas, an AI Architect focused on LLM/RAG systems, data engineering, Salesforce Marketing Cloud, Data Cloud, CRM/CDP activation, and marketing automation architecture.",
+    "Portfolio of Renato Boucas, an AI & Salesforce Architect and Data Engineering Manager focused on LLM/RAG systems, Salesforce Marketing Cloud, Data Cloud/CDP, enterprise integrations, customer data activation, and marketing automation architecture.",
   author: "Renato Boucas",
   email: "renatoboucas@gmail.com",
   ogImage: "/og-image.png",
   profileImage: "/images/renato-profile.png",
   sameAs: ["https://www.linkedin.com/in/renatoboucas"],
-  professionalTitle: "AI Architect | Data Engineering | Salesforce & CRM/CDP Architecture",
+  professionalTitle: "AI & Salesforce Architect | Data Engineering Manager | 3x Salesforce Certified",
   nav: [
     { label: "Home", href: "/" },
     { label: "Projects", href: "/projects" },

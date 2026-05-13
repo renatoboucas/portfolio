@@ -133,7 +133,7 @@ Only configured values are rendered. Empty GitHub, website, phone, and Calendly 
 ```ts
 export const contactInfo = {
   email: "renatoboucas@gmail.com",
-  linkedin: "https://www.linkedin.com/in/renato-boucas-83b7331b3/",
+  linkedin: "https://www.linkedin.com/in/renatoboucas",
   github: "",
   website: "",
   calendly: "",
@@ -657,5 +657,5 @@ Update assistant knowledge:
 Renato Boucas
 AI Implementation | Data Engineering | Salesforce Architecture
 Portfolio: https://renatoboucas.com
-LinkedIn: https://www.linkedin.com/in/renato-boucas-83b7331b3/
+LinkedIn: https://www.linkedin.com/in/renatoboucas
 ```

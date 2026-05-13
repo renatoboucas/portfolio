@@ -11,7 +11,7 @@ export type ContactInfo = {
 export const contactInfo: ContactInfo = {
   email: "renatoboucas@gmail.com",
   phone: "",
-  linkedin: "https://www.linkedin.com/in/renato-boucas-83b7331b3/",
+  linkedin: "https://www.linkedin.com/in/renatoboucas",
   github: "",
   website: "",
   calendly: "",

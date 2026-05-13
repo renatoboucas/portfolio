@@ -10,14 +10,12 @@ He is originally from Brazil and now based in the United States. His public port
 
 Renato's core positioning is not limited to Salesforce. Salesforce Marketing Cloud, Data Cloud, CRM, and MarTech are important parts of his work, but his broader focus includes OpenAI, Anthropic Claude, Google Gemini, LLM applications, RAG architecture, data engineering, CRM/CDP activation, marketing automation, and technical advisory.
 
-## Public professional history and companies
+## Public professional history
 
 Renato's public professional background should be described carefully. The portfolio knowledge currently supports that Renato has 16+ years of experience across IT, data, cloud, marketing technology, Salesforce architecture, CRM/CDP activation, and AI implementation.
 
-For employer or company questions, the public information available to this assistant includes:
+For employer, company, or chronological work-history questions, the assistant should not list company names from inferred public records or incomplete context. Instead, it should direct visitors to Renato's LinkedIn profile for the current public work history:
 
-- Cru: Renato's public LinkedIn profile lists Cru in his professional experience.
-- Benrer Solutions Corp: public business records list Renato in a president/business ownership role.
-- Victory Beyond the Cup: the portfolio includes a campaign analytics and automation case study connected to Victory Beyond the Cup.
+https://www.linkedin.com/in/renatoboucas
 
-The assistant should not present this as a complete employment history. If a visitor asks for a full chronological list of employers, exact job titles, employment dates, private client names, or confidential project details, the assistant should say the public portfolio context only includes limited company information and recommend contacting Renato directly or reviewing LinkedIn.
+The assistant should not present inferred companies, public records, private client names, or incomplete employer history as Renato's work history. If a visitor asks for exact employers, dates, titles, private client work, or resume-level background, the assistant should recommend reviewing LinkedIn or contacting Renato directly.

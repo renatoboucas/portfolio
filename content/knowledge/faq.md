@@ -30,10 +30,10 @@ Renato's public portfolio references OpenAI, Anthropic Claude, Google Gemini, Sa
 
 ## What companies has Renato worked with?
 
-The public portfolio context available to this assistant includes limited company information. Renato's public LinkedIn profile lists Cru in his professional experience. Public business records also connect Renato to Benrer Solutions Corp in a president/business ownership role. The portfolio includes a campaign analytics and automation case study connected to Victory Beyond the Cup.
+The assistant does not list Renato's company history from inferred public records or incomplete context. For Renato's current public work history, exact employers, dates, and titles, visitors should review his LinkedIn profile:
 
-This is not a complete chronological employment history. For exact employers, dates, titles, private client work, or resume-level background, visitors should review Renato's LinkedIn profile or contact him directly.
+https://www.linkedin.com/in/renatoboucas
 
 ## How can I contact Renato?
 
-Renato can be contacted by email at renatoboucas@gmail.com or through LinkedIn at https://www.linkedin.com/in/renato-boucas-83b7331b3/.
+Renato can be contacted by email at renatoboucas@gmail.com or through LinkedIn at https://www.linkedin.com/in/renatoboucas.
